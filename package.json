@@ -1,0 +1,24 @@
+{
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview",
+		"export:data": "node scripts/export-data.mjs",
+		"backend": "node backend/server.mjs",
+		"analyze:demo": "node backend/demo.mjs"
+	},
+	"dependencies": {
+		"@langchain/core": "^1.1.47",
+		"@langchain/langgraph": "^1.3.2",
+		"framer-motion": "^12.39.0",
+		"openai": "^6.38.0",
+		"react": "^19.2.6",
+		"react-dom": "^19.2.6",
+		"zod": "^4.4.3"
+	},
+	"devDependencies": {
+		"@vitejs/plugin-react": "^6.0.2",
+		"vite": "^8.0.13"
+	}
+}

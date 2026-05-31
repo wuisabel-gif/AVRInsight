@@ -1,0 +1,66 @@
+export const avrInterrupts = {
+  sections: [
+    {
+      id: "external",
+      title: "External Interrupts",
+      summary:
+        "INT0 and INT1 are dedicated hardware interrupt lines on D2 and D3. They have selectable trigger modes controlled in EICRA and can wake the CPU without polling in loop().",
+      steps: ["Pin edge", "Edge detector", "INT flag set", "ISR runs"],
+      examples: ["attachInterrupt(digitalPinToInterrupt(2), isr, RISING)", "EICRA selects LOW / CHANGE / FALLING / RISING"],
+      relatedPins: ["D2", "D3"],
+    },
+    {
+      id: "pin-change",
+      title: "Pin-Change Interrupts",
+      summary:
+        "Pin-change interrupts work on many pins, but they fire as a group. Hardware raises a group flag, then software checks which port bit actually changed.",
+      steps: ["Pin toggles", "PCMSK bit matches", "PCIF group flag set", "ISR checks changed bit"],
+      examples: ["PCICR enables group", "PCMSK0/1/2 enable individual pins"],
+      relatedPins: ["D2", "D8", "A4"],
+    },
+    {
+      id: "timer",
+      title: "Timer Interrupts",
+      summary:
+        "Timers count independently of external pin edges. They can trigger compare-match, overflow, and input-capture interrupts, which is why they are used for PWM, periodic events, and precise timing.",
+      steps: ["Counter increments", "Match or overflow", "Timer flag set", "ISR runs"],
+      examples: ["TCNT1 == OCR1A -> compare match", "TIMSK1 enables OCIE1A / TOIE1 / ICIE1"],
+      relatedPins: ["D8", "D9", "D10", "D3", "D11", "D5", "D6"],
+    },
+    {
+      id: "polling",
+      title: "Polling In loop()",
+      summary:
+        "Polling repeatedly checks a state in software. It is easy to understand, but it can miss short events or waste CPU time compared with dedicated hardware interrupts.",
+      steps: ["loop() runs", "Software reads pin", "Condition checked", "Action happens later"],
+      examples: ["if (digitalRead(2)) { ... }", "No hardware flag or ISR needed"],
+      relatedPins: ["D2"],
+    },
+  ],
+  timerOverview: [
+    {
+      name: "Timer0",
+      width: "8-bit",
+      highlights: ["PWM on D5/OC0B and D6/OC0A", "Also supports overflow timing used by Arduino core helpers"],
+      registers: ["TCCR0A", "TCCR0B", "TCNT0", "OCR0A", "OCR0B", "TIMSK0", "TIFR0"],
+    },
+    {
+      name: "Timer1",
+      width: "16-bit",
+      highlights: ["PWM on D9/OC1A and D10/OC1B", "Input capture on D8/ICP1", "Common choice for precise compare interrupts"],
+      registers: ["TCCR1A", "TCCR1B", "TCNT1", "OCR1A", "OCR1B", "ICR1", "TIMSK1", "TIFR1"],
+    },
+    {
+      name: "Timer2",
+      width: "8-bit",
+      highlights: ["PWM on D3/OC2B and D11/OC2A", "Independent timer useful for waveform and timing experiments"],
+      registers: ["TCCR2A", "TCCR2B", "TCNT2", "OCR2A", "OCR2B", "TIMSK2", "TIFR2"],
+    },
+  ],
+  modeTable: [
+    { bits: "ISC01=0, ISC00=0", meaning: "LOW level" },
+    { bits: "ISC01=0, ISC00=1", meaning: "Any logical change" },
+    { bits: "ISC01=1, ISC00=0", meaning: "Falling edge" },
+    { bits: "ISC01=1, ISC00=1", meaning: "Rising edge" },
+  ],
+};

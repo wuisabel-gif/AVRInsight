@@ -1,0 +1,1525 @@
+[
+  {
+    "description": "D0 is Arduino digital pin 0, which maps to ATmega328P pin PD0. It is the hardware UART receive line and also belongs to the PCINT[23:16] pin-change interrupt group.",
+    "beginnerExplanation": "Arduino gives this pad the simple name D0, but the microcontroller calls the same electrical connection PD0 because it is bit 0 of port D. Serial examples may call it RX, while interrupt code may call it PCINT16.",
+    "communication": [
+      "UART RX"
+    ],
+    "timers": [],
+    "relatedRegisters": [
+      "PORTD",
+      "DDRD",
+      "PIND",
+      "UCSR0A",
+      "UCSR0B",
+      "UDR0",
+      "PCICR",
+      "PCMSK2"
+    ],
+    "aliases": [
+      "D0",
+      "Digital 0",
+      "Pin 0",
+      "PD0",
+      "PORTD0",
+      "RX",
+      "RXD",
+      "PCINT16",
+      "USART RX"
+    ],
+    "functions": [
+      "GPIO",
+      "UART Receive",
+      "Pin Change Interrupt"
+    ],
+    "pwm": false,
+    "id": "D0",
+    "displayName": "Digital Pin 0 / RX",
+    "category": "digital",
+    "header": "JDIGITAL",
+    "headerPinNumber": 1,
+    "arduinoPin": "D0",
+    "avrPort": "PORTD",
+    "avrPin": "PD0",
+    "bit": 0,
+    "headerPositionLabel": "Top digital header, far right",
+    "physicalLocation": {
+      "x": 401,
+      "y": 79
+    },
+    "pinChangeInterrupt": {
+      "name": "PCINT16",
+      "group": "PCINT[23:16]",
+      "maskRegister": "PCMSK2",
+      "enableRegister": "PCICR",
+      "enableBit": "PCIE2",
+      "flagRegister": "PCIFR",
+      "vector": "PCINT2_vect"
+    },
+    "exampleCode": "\npinMode(0, INPUT_PULLUP);\nif (PIND & (1 << PIND0)) {\n  // PD0 is HIGH\n}\n"
+  },
+  {
+    "description": "D1 is Arduino digital pin 1, backed by PD1 on the ATmega328P. It is the hardware transmit pin for the UART and can also take part in pin-change interrupts.",
+    "beginnerExplanation": "The same pad is named TX in Arduino serial tutorials, D1 in beginner sketches, and PD1 in low-level AVR code because each name describes a different layer of the same wire.",
+    "communication": [
+      "UART TX"
+    ],
+    "timers": [],
+    "relatedRegisters": [
+      "PORTD",
+      "DDRD",
+      "PIND",
+      "UCSR0A",
+      "UCSR0B",
+      "UDR0",
+      "PCICR",
+      "PCMSK2"
+    ],
+    "aliases": [
+      "D1",
+      "Digital 1",
+      "Pin 1",
+      "PD1",
+      "PORTD1",
+      "TX",
+      "TXD",
+      "PCINT17",
+      "USART TX"
+    ],
+    "functions": [
+      "GPIO",
+      "UART Transmit",
+      "Pin Change Interrupt"
+    ],
+    "pwm": false,
+    "id": "D1",
+    "displayName": "Digital Pin 1 / TX",
+    "category": "digital",
+    "header": "JDIGITAL",
+    "headerPinNumber": 2,
+    "arduinoPin": "D1",
+    "avrPort": "PORTD",
+    "avrPin": "PD1",
+    "bit": 1,
+    "headerPositionLabel": "Top digital header, second from right",
+    "physicalLocation": {
+      "x": 391,
+      "y": 79
+    },
+    "pinChangeInterrupt": {
+      "name": "PCINT17",
+      "group": "PCINT[23:16]",
+      "maskRegister": "PCMSK2",
+      "enableRegister": "PCICR",
+      "enableBit": "PCIE2",
+      "flagRegister": "PCIFR",
+      "vector": "PCINT2_vect"
+    },
+    "exampleCode": "\nSerial.begin(9600);\nSerial.println(\"TX on D1 uses the same hardware line as PD1\");\n"
+  },
+  {
+    "description": "D2 is Arduino digital pin 2, which is the same microcontroller pin as PD2. That one physical pad can be used as normal GPIO, as the dedicated external interrupt input INT0, or as pin-change interrupt source PCINT18.",
+    "beginnerExplanation": "This is the classic example of one pad having many names. D2 is the board-level label, PD2 is the ATmega328P port-bit name, INT0 is its dedicated interrupt function, and PCINT18 is its grouped pin-change interrupt identity.",
+    "communication": [],
+    "timers": [],
+    "relatedRegisters": [
+      "PORTD",
+      "DDRD",
+      "PIND",
+      "EICRA",
+      "EIMSK",
+      "EIFR",
+      "PCICR",
+      "PCMSK2"
+    ],
+    "aliases": [
+      "D2",
+      "Digital 2",
+      "Pin 2",
+      "PD2",
+      "PORTD2",
+      "INT0",
+      "PCINT18",
+      "External Interrupt 0",
+      "attachInterrupt"
+    ],
+    "functions": [
+      "GPIO",
+      "External Interrupt",
+      "Pin Change Interrupt"
+    ],
+    "pwm": false,
+    "id": "D2",
+    "displayName": "Digital Pin 2",
+    "category": "digital",
+    "header": "JDIGITAL",
+    "headerPinNumber": 3,
+    "arduinoPin": "D2",
+    "avrPort": "PORTD",
+    "avrPin": "PD2",
+    "bit": 2,
+    "headerPositionLabel": "Top digital header, third from right",
+    "physicalLocation": {
+      "x": 381,
+      "y": 79
+    },
+    "externalInterrupt": {
+      "name": "INT0",
+      "controlRegister": "EICRA",
+      "maskRegister": "EIMSK",
+      "flagRegister": "EIFR",
+      "vector": "INT0_vect",
+      "modes": [
+        "LOW level",
+        "any logical change",
+        "falling edge",
+        "rising edge"
+      ],
+      "modeBits": [
+        "ISC01",
+        "ISC00"
+      ]
+    },
+    "pinChangeInterrupt": {
+      "name": "PCINT18",
+      "group": "PCINT[23:16]",
+      "maskRegister": "PCMSK2",
+      "enableRegister": "PCICR",
+      "enableBit": "PCIE2",
+      "flagRegister": "PCIFR",
+      "vector": "PCINT2_vect"
+    },
+    "exampleCode": "\npinMode(2, INPUT_PULLUP);\nattachInterrupt(digitalPinToInterrupt(2), onPulse, RISING);\n\nvoid onPulse() {\n  // INT0 on D2 / PD2 fired\n}\n"
+  },
+  {
+    "description": "D3 maps to PD3, which is both external interrupt INT1 and pin-change interrupt PCINT19. It is also tied to the Timer2 compare output OC2B, so Arduino treats it as a PWM-capable pin.",
+    "beginnerExplanation": "When you call `analogWrite(3, value)`, you are really asking Timer2 hardware to wiggle the OC2B function on PD3. In an interrupt example, the very same metal pad can instead behave as INT1.",
+    "communication": [],
+    "timers": [
+      {
+        "name": "Timer2",
+        "channel": "OC2B",
+        "compareRegister": "OCR2B"
+      }
+    ],
+    "relatedRegisters": [
+      "PORTD",
+      "DDRD",
+      "PIND",
+      "EICRA",
+      "EIMSK",
+      "EIFR",
+      "TCCR2A",
+      "TCCR2B",
+      "OCR2B",
+      "TIMSK2",
+      "PCMSK2"
+    ],
+    "aliases": [
+      "D3",
+      "Digital 3",
+      "Pin 3",
+      "PD3",
+      "PORTD3",
+      "INT1",
+      "PCINT19",
+      "PWM",
+      "OC2B",
+      "Timer2",
+      "OCR2B"
+    ],
+    "functions": [
+      "GPIO",
+      "External Interrupt",
+      "Pin Change Interrupt",
+      "PWM Output"
+    ],
+    "pwm": true,
+    "id": "D3",
+    "displayName": "Digital Pin 3",
+    "category": "digital",
+    "header": "JDIGITAL",
+    "headerPinNumber": 4,
+    "arduinoPin": "D3",
+    "avrPort": "PORTD",
+    "avrPin": "PD3",
+    "bit": 3,
+    "headerPositionLabel": "Top digital header, fourth from right",
+    "physicalLocation": {
+      "x": 371,
+      "y": 79
+    },
+    "externalInterrupt": {
+      "name": "INT1",
+      "controlRegister": "EICRA",
+      "maskRegister": "EIMSK",
+      "flagRegister": "EIFR",
+      "vector": "INT1_vect",
+      "modes": [
+        "LOW level",
+        "any logical change",
+        "falling edge",
+        "rising edge"
+      ],
+      "modeBits": [
+        "ISC11",
+        "ISC10"
+      ]
+    },
+    "pinChangeInterrupt": {
+      "name": "PCINT19",
+      "group": "PCINT[23:16]",
+      "maskRegister": "PCMSK2",
+      "enableRegister": "PCICR",
+      "enableBit": "PCIE2",
+      "flagRegister": "PCIFR",
+      "vector": "PCINT2_vect"
+    },
+    "exampleCode": "\npinMode(3, OUTPUT);\nanalogWrite(3, 128); // Timer2 -> OC2B -> D3 / PD3\n"
+  },
+  {
+    "description": "D4 is ordinary Arduino digital pin 4 at the board level, but in AVR naming it is PD4 and PCINT20. The ATmega328P also labels this line T0 because it can feed an external clock into Timer0.",
+    "beginnerExplanation": "A board label tells you where to plug a jumper. The AVR label tells you which port register controls it. Peripheral labels like T0 tell you what special hardware can borrow the same wire.",
+    "communication": [],
+    "timers": [],
+    "relatedRegisters": [
+      "PORTD",
+      "DDRD",
+      "PIND",
+      "PCICR",
+      "PCMSK2",
+      "TCCR0B"
+    ],
+    "aliases": [
+      "D4",
+      "Digital 4",
+      "Pin 4",
+      "PD4",
+      "PORTD4",
+      "PCINT20",
+      "T0",
+      "XCK"
+    ],
+    "functions": [
+      "GPIO",
+      "Pin Change Interrupt",
+      "Timer Counter Input"
+    ],
+    "pwm": false,
+    "id": "D4",
+    "displayName": "Digital Pin 4",
+    "category": "digital",
+    "header": "JDIGITAL",
+    "headerPinNumber": 5,
+    "arduinoPin": "D4",
+    "avrPort": "PORTD",
+    "avrPin": "PD4",
+    "bit": 4,
+    "headerPositionLabel": "Top digital header, fifth from right",
+    "physicalLocation": {
+      "x": 361,
+      "y": 79
+    },
+    "pinChangeInterrupt": {
+      "name": "PCINT20",
+      "group": "PCINT[23:16]",
+      "maskRegister": "PCMSK2",
+      "enableRegister": "PCICR",
+      "enableBit": "PCIE2",
+      "flagRegister": "PCIFR",
+      "vector": "PCINT2_vect"
+    },
+    "exampleCode": "\npinMode(4, INPUT);\n// PD4 can also act as T0 or PCINT20 depending on peripheral setup.\n"
+  },
+  {
+    "description": "D5 is backed by PD5 and can emit the OC0B timer output from Timer0, which makes it a PWM-capable pin on the UNO.",
+    "beginnerExplanation": "Arduino hides the timer details for you in `analogWrite`, but the PWM waveform on D5 comes from Timer0 compare hardware, not from software manually toggling the pin.",
+    "communication": [],
+    "timers": [
+      {
+        "name": "Timer0",
+        "channel": "OC0B",
+        "compareRegister": "OCR0B"
+      }
+    ],
+    "relatedRegisters": [
+      "PORTD",
+      "DDRD",
+      "PIND",
+      "TCCR0A",
+      "TCCR0B",
+      "OCR0B",
+      "TIMSK0",
+      "PCMSK2"
+    ],
+    "aliases": [
+      "D5",
+      "Digital 5",
+      "Pin 5",
+      "PD5",
+      "PORTD5",
+      "PCINT21",
+      "PWM",
+      "OC0B",
+      "Timer0",
+      "OCR0B",
+      "T1"
+    ],
+    "functions": [
+      "GPIO",
+      "Pin Change Interrupt",
+      "PWM Output"
+    ],
+    "pwm": true,
+    "id": "D5",
+    "displayName": "Digital Pin 5",
+    "category": "digital",
+    "header": "JDIGITAL",
+    "headerPinNumber": 6,
+    "arduinoPin": "D5",
+    "avrPort": "PORTD",
+    "avrPin": "PD5",
+    "bit": 5,
+    "headerPositionLabel": "Top digital header, sixth from right",
+    "physicalLocation": {
+      "x": 351,
+      "y": 79
+    },
+    "pinChangeInterrupt": {
+      "name": "PCINT21",
+      "group": "PCINT[23:16]",
+      "maskRegister": "PCMSK2",
+      "enableRegister": "PCICR",
+      "enableBit": "PCIE2",
+      "flagRegister": "PCIFR",
+      "vector": "PCINT2_vect"
+    },
+    "exampleCode": "\nanalogWrite(5, 64); // Timer0 compare output OC0B on PD5\n"
+  },
+  {
+    "description": "D6 is the Arduino label for PD6. It can be ordinary GPIO, pin-change interrupt PCINT22, Timer0 compare output OC0A for PWM, or comparator input AIN0.",
+    "beginnerExplanation": "Names like OC0A and AIN0 do not mean extra pins exist. They are alternate hardware functions that all share the same PD6 connection.",
+    "communication": [],
+    "timers": [
+      {
+        "name": "Timer0",
+        "channel": "OC0A",
+        "compareRegister": "OCR0A"
+      }
+    ],
+    "relatedRegisters": [
+      "PORTD",
+      "DDRD",
+      "PIND",
+      "TCCR0A",
+      "TCCR0B",
+      "OCR0A",
+      "ACSR",
+      "PCMSK2"
+    ],
+    "aliases": [
+      "D6",
+      "Digital 6",
+      "Pin 6",
+      "PD6",
+      "PORTD6",
+      "PCINT22",
+      "PWM",
+      "OC0A",
+      "Timer0",
+      "OCR0A",
+      "AIN0"
+    ],
+    "functions": [
+      "GPIO",
+      "Pin Change Interrupt",
+      "PWM Output",
+      "Analog Comparator"
+    ],
+    "pwm": true,
+    "id": "D6",
+    "displayName": "Digital Pin 6",
+    "category": "digital",
+    "header": "JDIGITAL",
+    "headerPinNumber": 7,
+    "arduinoPin": "D6",
+    "avrPort": "PORTD",
+    "avrPin": "PD6",
+    "bit": 6,
+    "headerPositionLabel": "Top digital header, seventh from right",
+    "physicalLocation": {
+      "x": 341,
+      "y": 79
+    },
+    "pinChangeInterrupt": {
+      "name": "PCINT22",
+      "group": "PCINT[23:16]",
+      "maskRegister": "PCMSK2",
+      "enableRegister": "PCICR",
+      "enableBit": "PCIE2",
+      "flagRegister": "PCIFR",
+      "vector": "PCINT2_vect"
+    },
+    "exampleCode": "\nanalogWrite(6, 200); // Timer0 compare output OC0A on D6\n"
+  },
+  {
+    "description": "D7 is general-purpose Arduino digital pin 7, which the ATmega328P calls PD7. It is also pin-change interrupt PCINT23 and analog comparator input AIN1.",
+    "beginnerExplanation": "The board label D7 is the easiest name to plug into `pinMode`, but low-level code often talks about PD7 because it is the highest bit in port D.",
+    "communication": [],
+    "timers": [],
+    "relatedRegisters": [
+      "PORTD",
+      "DDRD",
+      "PIND",
+      "ACSR",
+      "PCICR",
+      "PCMSK2"
+    ],
+    "aliases": [
+      "D7",
+      "Digital 7",
+      "Pin 7",
+      "PD7",
+      "PORTD7",
+      "PCINT23",
+      "AIN1"
+    ],
+    "functions": [
+      "GPIO",
+      "Pin Change Interrupt",
+      "Analog Comparator"
+    ],
+    "pwm": false,
+    "id": "D7",
+    "displayName": "Digital Pin 7",
+    "category": "digital",
+    "header": "JDIGITAL",
+    "headerPinNumber": 8,
+    "arduinoPin": "D7",
+    "avrPort": "PORTD",
+    "avrPin": "PD7",
+    "bit": 7,
+    "headerPositionLabel": "Top digital header, eighth from right",
+    "physicalLocation": {
+      "x": 331,
+      "y": 79
+    },
+    "pinChangeInterrupt": {
+      "name": "PCINT23",
+      "group": "PCINT[23:16]",
+      "maskRegister": "PCMSK2",
+      "enableRegister": "PCICR",
+      "enableBit": "PCIE2",
+      "flagRegister": "PCIFR",
+      "vector": "PCINT2_vect"
+    },
+    "exampleCode": "\npinMode(7, INPUT_PULLUP);\nif (PIND & (1 << PIND7)) {\n  // D7 / PD7 is HIGH\n}\n"
+  },
+  {
+    "description": "D8 maps to PB0 and can feed the Timer1 input capture hardware as ICP1. It is also the first pin in the PORTB pin-change interrupt group.",
+    "beginnerExplanation": "Timer1 can watch this pin for a precise edge and copy the current counter value into a register. That capture role is why you may see D8 called ICP1 in advanced timing examples.",
+    "communication": [],
+    "timers": [
+      {
+        "name": "Timer1",
+        "channel": "ICP1",
+        "compareRegister": "ICR1"
+      }
+    ],
+    "relatedRegisters": [
+      "PORTB",
+      "DDRB",
+      "PINB",
+      "TCCR1B",
+      "ICR1",
+      "TIMSK1",
+      "PCMSK0"
+    ],
+    "aliases": [
+      "D8",
+      "Digital 8",
+      "Pin 8",
+      "PB0",
+      "PORTB0",
+      "PCINT0",
+      "ICP1",
+      "CLKO",
+      "Timer1"
+    ],
+    "functions": [
+      "GPIO",
+      "Pin Change Interrupt",
+      "Timer1 Input Capture"
+    ],
+    "pwm": false,
+    "id": "D8",
+    "displayName": "Digital Pin 8",
+    "category": "digital",
+    "header": "JDIGITAL",
+    "headerPinNumber": 9,
+    "arduinoPin": "D8",
+    "avrPort": "PORTB",
+    "avrPin": "PB0",
+    "bit": 0,
+    "headerPositionLabel": "Top digital header, ninth from right",
+    "physicalLocation": {
+      "x": 321,
+      "y": 79
+    },
+    "pinChangeInterrupt": {
+      "name": "PCINT0",
+      "group": "PCINT[7:0]",
+      "maskRegister": "PCMSK0",
+      "enableRegister": "PCICR",
+      "enableBit": "PCIE0",
+      "flagRegister": "PCIFR",
+      "vector": "PCINT0_vect"
+    },
+    "exampleCode": "\npinMode(8, INPUT);\n// PB0 can be used as ICP1 when Timer1 input capture is enabled.\n"
+  },
+  {
+    "description": "D9 is PB1 on the ATmega328P, also known as OC1A when Timer1 is driving its A compare output. It is one of the main physical pins affected by Timer1 compare register setup.",
+    "beginnerExplanation": "Searches for `Timer1`, `OC1A`, or `OCR1A` often lead here because the compare unit and the physical output pin are closely related. The register names configure the timer, while D9 is where you can observe the result.",
+    "communication": [],
+    "timers": [
+      {
+        "name": "Timer1",
+        "channel": "OC1A",
+        "compareRegister": "OCR1A"
+      }
+    ],
+    "relatedRegisters": [
+      "PORTB",
+      "DDRB",
+      "PINB",
+      "TCCR1A",
+      "TCCR1B",
+      "OCR1A",
+      "TIMSK1",
+      "TIFR1",
+      "PCMSK0"
+    ],
+    "aliases": [
+      "D9",
+      "Digital 9",
+      "Pin 9",
+      "PB1",
+      "PORTB1",
+      "PCINT1",
+      "PWM",
+      "OC1A",
+      "Timer1",
+      "OCR1A",
+      "TCCR1A",
+      "TCCR1B"
+    ],
+    "functions": [
+      "GPIO",
+      "Pin Change Interrupt",
+      "PWM Output",
+      "Timer1 Compare Output"
+    ],
+    "pwm": true,
+    "id": "D9",
+    "displayName": "Digital Pin 9",
+    "category": "digital",
+    "header": "JDIGITAL",
+    "headerPinNumber": 10,
+    "arduinoPin": "D9",
+    "avrPort": "PORTB",
+    "avrPin": "PB1",
+    "bit": 1,
+    "headerPositionLabel": "Top digital header, tenth from right",
+    "physicalLocation": {
+      "x": 311,
+      "y": 79
+    },
+    "pinChangeInterrupt": {
+      "name": "PCINT1",
+      "group": "PCINT[7:0]",
+      "maskRegister": "PCMSK0",
+      "enableRegister": "PCICR",
+      "enableBit": "PCIE0",
+      "flagRegister": "PCIFR",
+      "vector": "PCINT0_vect"
+    },
+    "exampleCode": "\npinMode(9, OUTPUT);\nanalogWrite(9, 128); // Timer1 compare output A -> D9 / PB1\n"
+  },
+  {
+    "description": "D10 is Arduino digital pin 10, the SPI chip-select line SS, and AVR port pin PB2. It is also the Timer1 compare B output OC1B and pin-change interrupt PCINT2.",
+    "beginnerExplanation": "SPI examples call this pin SS or CS because of its bus role. Timer examples call it OC1B because Timer1 can generate a waveform there. Register code calls it PB2 because it is bit 2 of port B.",
+    "communication": [
+      "SPI SS / CS"
+    ],
+    "timers": [
+      {
+        "name": "Timer1",
+        "channel": "OC1B",
+        "compareRegister": "OCR1B"
+      }
+    ],
+    "relatedRegisters": [
+      "PORTB",
+      "DDRB",
+      "PINB",
+      "SPCR",
+      "SPSR",
+      "SPDR",
+      "TCCR1A",
+      "TCCR1B",
+      "OCR1B",
+      "TIMSK1",
+      "PCMSK0"
+    ],
+    "aliases": [
+      "D10",
+      "Digital 10",
+      "Pin 10",
+      "PB2",
+      "PORTB2",
+      "PCINT2",
+      "SS",
+      "SPI SS",
+      "PWM",
+      "OC1B",
+      "Timer1",
+      "OCR1B",
+      "TCCR1A",
+      "TCCR1B"
+    ],
+    "functions": [
+      "GPIO",
+      "Pin Change Interrupt",
+      "SPI Chip Select",
+      "PWM Output",
+      "Timer1 Compare Output"
+    ],
+    "pwm": true,
+    "id": "D10",
+    "displayName": "Digital Pin 10 / SS",
+    "category": "digital",
+    "header": "JDIGITAL",
+    "headerPinNumber": 11,
+    "arduinoPin": "D10",
+    "avrPort": "PORTB",
+    "avrPin": "PB2",
+    "bit": 2,
+    "headerPositionLabel": "Top digital header, eleventh from right",
+    "physicalLocation": {
+      "x": 301,
+      "y": 79
+    },
+    "pinChangeInterrupt": {
+      "name": "PCINT2",
+      "group": "PCINT[7:0]",
+      "maskRegister": "PCMSK0",
+      "enableRegister": "PCICR",
+      "enableBit": "PCIE0",
+      "flagRegister": "PCIFR",
+      "vector": "PCINT0_vect"
+    },
+    "exampleCode": "\npinMode(10, OUTPUT);\ndigitalWrite(10, HIGH); // SPI slave-select idle state\n"
+  },
+  {
+    "description": "D11 is PB3 on the ATmega328P. It is the MOSI line for SPI, pin-change interrupt PCINT3, and the OC2A PWM output from Timer2.",
+    "beginnerExplanation": "If you search for MOSI you are asking about the communication role of the pin. If you search for PB3 you are asking how the AVR port registers see it. Both names lead to the same pad.",
+    "communication": [
+      "SPI MOSI"
+    ],
+    "timers": [
+      {
+        "name": "Timer2",
+        "channel": "OC2A",
+        "compareRegister": "OCR2A"
+      }
+    ],
+    "relatedRegisters": [
+      "PORTB",
+      "DDRB",
+      "PINB",
+      "SPCR",
+      "SPSR",
+      "SPDR",
+      "TCCR2A",
+      "TCCR2B",
+      "OCR2A",
+      "PCMSK0"
+    ],
+    "aliases": [
+      "D11",
+      "Digital 11",
+      "Pin 11",
+      "PB3",
+      "PORTB3",
+      "PCINT3",
+      "MOSI",
+      "SPI MOSI",
+      "PWM",
+      "OC2A",
+      "Timer2",
+      "OCR2A"
+    ],
+    "functions": [
+      "GPIO",
+      "Pin Change Interrupt",
+      "SPI Data Out",
+      "PWM Output"
+    ],
+    "pwm": true,
+    "id": "D11",
+    "displayName": "Digital Pin 11 / MOSI",
+    "category": "digital",
+    "header": "JDIGITAL",
+    "headerPinNumber": 12,
+    "arduinoPin": "D11",
+    "avrPort": "PORTB",
+    "avrPin": "PB3",
+    "bit": 3,
+    "headerPositionLabel": "Top digital header, twelfth from right",
+    "physicalLocation": {
+      "x": 291,
+      "y": 79
+    },
+    "pinChangeInterrupt": {
+      "name": "PCINT3",
+      "group": "PCINT[7:0]",
+      "maskRegister": "PCMSK0",
+      "enableRegister": "PCICR",
+      "enableBit": "PCIE0",
+      "flagRegister": "PCIFR",
+      "vector": "PCINT0_vect"
+    },
+    "exampleCode": "\npinMode(11, OUTPUT); // MOSI when acting as SPI controller\nanalogWrite(11, 180); // Timer2 compare output OC2A\n"
+  },
+  {
+    "description": "D12 maps to PB4 and serves as the SPI MISO line. It is also a member of the PORTB pin-change interrupt group as PCINT4.",
+    "beginnerExplanation": "MISO tells you the data direction in SPI, but PB4 tells you which AVR port bit to read or write when you are not using SPI hardware.",
+    "communication": [
+      "SPI MISO"
+    ],
+    "timers": [],
+    "relatedRegisters": [
+      "PORTB",
+      "DDRB",
+      "PINB",
+      "SPCR",
+      "SPSR",
+      "SPDR",
+      "PCMSK0"
+    ],
+    "aliases": [
+      "D12",
+      "Digital 12",
+      "Pin 12",
+      "PB4",
+      "PORTB4",
+      "PCINT4",
+      "MISO",
+      "SPI MISO"
+    ],
+    "functions": [
+      "GPIO",
+      "Pin Change Interrupt",
+      "SPI Data In"
+    ],
+    "pwm": false,
+    "id": "D12",
+    "displayName": "Digital Pin 12 / MISO",
+    "category": "digital",
+    "header": "JDIGITAL",
+    "headerPinNumber": 13,
+    "arduinoPin": "D12",
+    "avrPort": "PORTB",
+    "avrPin": "PB4",
+    "bit": 4,
+    "headerPositionLabel": "Top digital header, thirteenth from right",
+    "physicalLocation": {
+      "x": 281,
+      "y": 79
+    },
+    "pinChangeInterrupt": {
+      "name": "PCINT4",
+      "group": "PCINT[7:0]",
+      "maskRegister": "PCMSK0",
+      "enableRegister": "PCICR",
+      "enableBit": "PCIE0",
+      "flagRegister": "PCIFR",
+      "vector": "PCINT0_vect"
+    },
+    "exampleCode": "\npinMode(12, INPUT);\n// PB4 is the SPI MISO line when SPI hardware is active.\n"
+  },
+  {
+    "description": "D13 is PB5, the SPI serial clock output SCK, and the pin associated with the onboard LED on the UNO family. It is also pin-change interrupt PCINT5.",
+    "beginnerExplanation": "Beginners meet this pin as the built-in LED pin, communication examples call it SCK, and low-level code calls it PB5. Those are all labels for the same electrical node.",
+    "communication": [
+      "SPI SCK"
+    ],
+    "timers": [],
+    "relatedRegisters": [
+      "PORTB",
+      "DDRB",
+      "PINB",
+      "SPCR",
+      "SPSR",
+      "SPDR",
+      "PCMSK0"
+    ],
+    "aliases": [
+      "D13",
+      "Digital 13",
+      "Pin 13",
+      "PB5",
+      "PORTB5",
+      "PCINT5",
+      "SCK",
+      "SPI Clock",
+      "LED",
+      "Onboard LED"
+    ],
+    "functions": [
+      "GPIO",
+      "Pin Change Interrupt",
+      "SPI Clock",
+      "Onboard LED Related"
+    ],
+    "pwm": false,
+    "id": "D13",
+    "displayName": "Digital Pin 13 / SCK",
+    "category": "digital",
+    "header": "JDIGITAL",
+    "headerPinNumber": 14,
+    "arduinoPin": "D13",
+    "avrPort": "PORTB",
+    "avrPin": "PB5",
+    "bit": 5,
+    "headerPositionLabel": "Top digital header, far left",
+    "physicalLocation": {
+      "x": 271,
+      "y": 79
+    },
+    "pinChangeInterrupt": {
+      "name": "PCINT5",
+      "group": "PCINT[7:0]",
+      "maskRegister": "PCMSK0",
+      "enableRegister": "PCICR",
+      "enableBit": "PCIE0",
+      "flagRegister": "PCIFR",
+      "vector": "PCINT0_vect"
+    },
+    "exampleCode": "\npinMode(13, OUTPUT);\ndigitalWrite(13, HIGH); // onboard LED-related pin\n"
+  },
+  {
+    "description": "Ground is the shared electrical reference for the board. Multiple GND pads are connected together so shields and external circuits have convenient return points.",
+    "beginnerExplanation": "Ground does not map to an AVR port bit because it is not a GPIO signal. It is the electrical zero-volt reference that lets every other voltage make sense.",
+    "communication": [],
+    "timers": [],
+    "relatedRegisters": [],
+    "aliases": [
+      "GND",
+      "Ground",
+      "0V",
+      "Return"
+    ],
+    "functions": [
+      "Power Return",
+      "Reference Node"
+    ],
+    "pwm": false,
+    "id": "GND",
+    "displayName": "Ground",
+    "category": "power",
+    "header": "JDIGITAL",
+    "headerPinNumber": 15,
+    "arduinoPin": "GND",
+    "avrPort": null,
+    "avrPin": null,
+    "bit": null,
+    "headerPositionLabel": "Digital header ground, plus duplicated ground pads on power header",
+    "physicalLocation": {
+      "x": 226,
+      "y": 61
+    },
+    "secondaryLocations": [
+      {
+        "label": "JANALOG pin 6",
+        "x": 360,
+        "y": 338
+      },
+      {
+        "label": "JANALOG pin 7",
+        "x": 371,
+        "y": 338
+      }
+    ],
+    "exampleCode": "\n// No pinMode needed.\n// Connect your circuit's ground here so signal voltages share a common reference.\n"
+  },
+  {
+    "description": "AREF is the analog reference pin used by the ADC subsystem when you select an external reference source.",
+    "beginnerExplanation": "This is a board-level analog support pin rather than a normal digital I/O point. It helps the ADC decide what voltage should count as full-scale.",
+    "communication": [],
+    "timers": [],
+    "relatedRegisters": [
+      "ADMUX"
+    ],
+    "aliases": [
+      "AREF",
+      "Analog Reference",
+      "Reference Voltage"
+    ],
+    "functions": [
+      "ADC Reference Input"
+    ],
+    "pwm": false,
+    "id": "AREF",
+    "displayName": "Analog Reference",
+    "category": "control",
+    "header": "JDIGITAL",
+    "headerPinNumber": 16,
+    "arduinoPin": "AREF",
+    "avrPort": null,
+    "avrPin": "AREF",
+    "bit": null,
+    "headerPositionLabel": "Utility pins after digital header",
+    "physicalLocation": {
+      "x": 238,
+      "y": 61
+    },
+    "exampleCode": "\nanalogReference(EXTERNAL);\n// Provide a safe external reference on AREF if you use this mode.\n"
+  },
+  {
+    "description": "The first position on the JANALOG/power side is not connected according to the Arduino UNO R3 board datasheet.",
+    "beginnerExplanation": "NC means the header pad exists physically but is not wired into a board signal you should use.",
+    "communication": [],
+    "timers": [],
+    "relatedRegisters": [],
+    "aliases": [
+      "NC",
+      "Not Connected"
+    ],
+    "functions": [
+      "No Connection"
+    ],
+    "pwm": false,
+    "id": "NC",
+    "displayName": "Not Connected",
+    "category": "control",
+    "header": "JANALOG",
+    "headerPinNumber": 1,
+    "arduinoPin": "NC",
+    "avrPort": null,
+    "avrPin": null,
+    "bit": null,
+    "headerPositionLabel": "Bottom power header, far left",
+    "physicalLocation": {
+      "x": 305,
+      "y": 338
+    },
+    "exampleCode": "\n// No code example: this pad is intentionally not connected.\n"
+  },
+  {
+    "description": "IOREF is a board-level reference output used by shields to discover the logic voltage expected by the board.",
+    "beginnerExplanation": "Unlike GPIO pins, IOREF is there to help add-on hardware adapt safely to the board's logic voltage.",
+    "communication": [],
+    "timers": [],
+    "relatedRegisters": [],
+    "aliases": [
+      "IOREF",
+      "I/O Reference",
+      "Logic Reference"
+    ],
+    "functions": [
+      "Logic Voltage Reference"
+    ],
+    "pwm": false,
+    "id": "IOREF",
+    "displayName": "IOREF",
+    "category": "control",
+    "header": "JANALOG",
+    "headerPinNumber": 2,
+    "arduinoPin": "IOREF",
+    "avrPort": null,
+    "avrPin": null,
+    "bit": null,
+    "headerPositionLabel": "Bottom power header, second from left",
+    "physicalLocation": {
+      "x": 316,
+      "y": 338
+    },
+    "exampleCode": "\n// IOREF is primarily for shield hardware design rather than sketch code.\n"
+  },
+  {
+    "description": "RESET restarts the ATmega328P and re-runs the boot path. It is a board control signal, not a normal beginner I/O pin.",
+    "beginnerExplanation": "This pin has a very different job from digital pins. Pulling RESET low forces the microcontroller to reboot instead of reading or writing user data.",
+    "communication": [],
+    "timers": [],
+    "relatedRegisters": [
+      "MCUSR"
+    ],
+    "aliases": [
+      "RESET",
+      "RST",
+      "Reset Pin",
+      "PC6",
+      "nRESET"
+    ],
+    "functions": [
+      "Reset Input"
+    ],
+    "pwm": false,
+    "id": "RESET",
+    "displayName": "Reset",
+    "category": "control",
+    "header": "JANALOG",
+    "headerPinNumber": 3,
+    "arduinoPin": "RESET",
+    "avrPort": null,
+    "avrPin": "PC6 / RESET",
+    "bit": null,
+    "headerPositionLabel": "Bottom power header, third from left",
+    "physicalLocation": {
+      "x": 327,
+      "y": 338
+    },
+    "exampleCode": "\n// RESET is a hardware control line, not a normal digital pin for pinMode().\n"
+  },
+  {
+    "description": "The 3.3V header pin provides the board's regulated 3.3V rail for external circuits that need it.",
+    "beginnerExplanation": "Power pins are supply points, not programmable pins. They deliver voltage but do not have port names like PD2 or PB5.",
+    "communication": [],
+    "timers": [],
+    "relatedRegisters": [],
+    "aliases": [
+      "3.3V",
+      "3V3",
+      "+3V3"
+    ],
+    "functions": [
+      "3.3V Power Rail"
+    ],
+    "pwm": false,
+    "id": "3V3",
+    "displayName": "3.3V Power",
+    "category": "power",
+    "header": "JANALOG",
+    "headerPinNumber": 4,
+    "arduinoPin": "3.3V",
+    "avrPort": null,
+    "avrPin": null,
+    "bit": null,
+    "headerPositionLabel": "Bottom power header, fourth from left",
+    "physicalLocation": {
+      "x": 338,
+      "y": 338
+    },
+    "exampleCode": "\n// Use this as a 3.3V supply rail for suitable external hardware.\n"
+  },
+  {
+    "description": "The 5V pin exposes the main logic rail used by the UNO R3. Many beginner sensors and shields use this as their supply voltage.",
+    "beginnerExplanation": "5V is a power source, not a data signal. It matters because many AVR port names and logic thresholds assume this board-level supply voltage.",
+    "communication": [],
+    "timers": [],
+    "relatedRegisters": [],
+    "aliases": [
+      "5V",
+      "+5V",
+      "VCC",
+      "Logic Rail"
+    ],
+    "functions": [
+      "5V Power Rail"
+    ],
+    "pwm": false,
+    "id": "5V",
+    "displayName": "5V Power",
+    "category": "power",
+    "header": "JANALOG",
+    "headerPinNumber": 5,
+    "arduinoPin": "5V",
+    "avrPort": null,
+    "avrPin": null,
+    "bit": null,
+    "headerPositionLabel": "Bottom power header, fifth from left",
+    "physicalLocation": {
+      "x": 349,
+      "y": 338
+    },
+    "exampleCode": "\n// Use with care as a 5V supply rail for external hardware.\n"
+  },
+  {
+    "description": "VIN is the board's external input voltage node. It feeds the regulator path rather than acting as a GPIO signal.",
+    "beginnerExplanation": "VIN matters at the board power level, not the AVR port level. It helps power the system but is not something you configure in DDR or PORT registers.",
+    "communication": [],
+    "timers": [],
+    "relatedRegisters": [],
+    "aliases": [
+      "VIN",
+      "Voltage Input",
+      "Raw Input"
+    ],
+    "functions": [
+      "External Supply Input"
+    ],
+    "pwm": false,
+    "id": "VIN",
+    "displayName": "VIN",
+    "category": "power",
+    "header": "JANALOG",
+    "headerPinNumber": 8,
+    "arduinoPin": "VIN",
+    "avrPort": null,
+    "avrPin": null,
+    "bit": null,
+    "headerPositionLabel": "Bottom power header, far right",
+    "physicalLocation": {
+      "x": 382,
+      "y": 338
+    },
+    "exampleCode": "\n// VIN is for board power input, not normal sketch-level pin control.\n"
+  },
+  {
+    "description": "A0 is analog input 0 on the Arduino board, but it is also PC0 and PCINT8 at the AVR level.",
+    "beginnerExplanation": "Analog pins can still act like digital pins because they are still microcontroller pads. The analog name tells you how the Arduino API presents them, while PC0 tells you their port identity.",
+    "communication": [],
+    "timers": [],
+    "relatedRegisters": [
+      "PORTC",
+      "DDRC",
+      "PINC",
+      "ADMUX",
+      "ADCSRA",
+      "PCMSK1"
+    ],
+    "aliases": [
+      "A0",
+      "Analog 0",
+      "ADC0",
+      "PC0",
+      "PORTC0",
+      "PCINT8"
+    ],
+    "functions": [
+      "Analog Input",
+      "GPIO",
+      "Pin Change Interrupt"
+    ],
+    "pwm": false,
+    "id": "A0",
+    "displayName": "Analog Pin A0",
+    "category": "analog",
+    "header": "JANALOG",
+    "headerPinNumber": 9,
+    "arduinoPin": "A0",
+    "avrPort": "PORTC",
+    "avrPin": "PC0",
+    "bit": 0,
+    "headerPositionLabel": "Bottom analog header, far left",
+    "physicalLocation": {
+      "x": 387,
+      "y": 338
+    },
+    "pinChangeInterrupt": {
+      "name": "PCINT8",
+      "group": "PCINT[14:8]",
+      "maskRegister": "PCMSK1",
+      "enableRegister": "PCICR",
+      "enableBit": "PCIE1",
+      "flagRegister": "PCIFR",
+      "vector": "PCINT1_vect"
+    },
+    "exampleCode": "\nint value = analogRead(A0);\n"
+  },
+  {
+    "description": "A1 is analog input 1 and AVR port pin PC1. It can also take part in the PORTC pin-change interrupt group.",
+    "beginnerExplanation": "The Arduino analog label focuses on the ADC channel, while PC1 focuses on the GPIO bit position inside port C.",
+    "communication": [],
+    "timers": [],
+    "relatedRegisters": [
+      "PORTC",
+      "DDRC",
+      "PINC",
+      "ADMUX",
+      "ADCSRA",
+      "PCMSK1"
+    ],
+    "aliases": [
+      "A1",
+      "Analog 1",
+      "ADC1",
+      "PC1",
+      "PORTC1",
+      "PCINT9"
+    ],
+    "functions": [
+      "Analog Input",
+      "GPIO",
+      "Pin Change Interrupt"
+    ],
+    "pwm": false,
+    "id": "A1",
+    "displayName": "Analog Pin A1",
+    "category": "analog",
+    "header": "JANALOG",
+    "headerPinNumber": 10,
+    "arduinoPin": "A1",
+    "avrPort": "PORTC",
+    "avrPin": "PC1",
+    "bit": 1,
+    "headerPositionLabel": "Bottom analog header",
+    "physicalLocation": {
+      "x": 396,
+      "y": 338
+    },
+    "pinChangeInterrupt": {
+      "name": "PCINT9",
+      "group": "PCINT[14:8]",
+      "maskRegister": "PCMSK1",
+      "enableRegister": "PCICR",
+      "enableBit": "PCIE1",
+      "flagRegister": "PCIFR",
+      "vector": "PCINT1_vect"
+    },
+    "exampleCode": "\nint value = analogRead(A1);\n"
+  },
+  {
+    "description": "A2 is analog input 2, AVR port bit PC2, and pin-change interrupt source PCINT10.",
+    "beginnerExplanation": "Even if you only use it with `analogRead`, the microcontroller still sees the same metal connection as port C bit 2.",
+    "communication": [],
+    "timers": [],
+    "relatedRegisters": [
+      "PORTC",
+      "DDRC",
+      "PINC",
+      "ADMUX",
+      "ADCSRA",
+      "PCMSK1"
+    ],
+    "aliases": [
+      "A2",
+      "Analog 2",
+      "ADC2",
+      "PC2",
+      "PORTC2",
+      "PCINT10"
+    ],
+    "functions": [
+      "Analog Input",
+      "GPIO",
+      "Pin Change Interrupt"
+    ],
+    "pwm": false,
+    "id": "A2",
+    "displayName": "Analog Pin A2",
+    "category": "analog",
+    "header": "JANALOG",
+    "headerPinNumber": 11,
+    "arduinoPin": "A2",
+    "avrPort": "PORTC",
+    "avrPin": "PC2",
+    "bit": 2,
+    "headerPositionLabel": "Bottom analog header",
+    "physicalLocation": {
+      "x": 405,
+      "y": 338
+    },
+    "pinChangeInterrupt": {
+      "name": "PCINT10",
+      "group": "PCINT[14:8]",
+      "maskRegister": "PCMSK1",
+      "enableRegister": "PCICR",
+      "enableBit": "PCIE1",
+      "flagRegister": "PCIFR",
+      "vector": "PCINT1_vect"
+    },
+    "exampleCode": "\nint value = analogRead(A2);\n"
+  },
+  {
+    "description": "A3 is analog input 3, AVR port bit PC3, and pin-change interrupt source PCINT11.",
+    "beginnerExplanation": "This pin shows how the analog header is still just another group of microcontroller pads with GPIO and interrupt identity.",
+    "communication": [],
+    "timers": [],
+    "relatedRegisters": [
+      "PORTC",
+      "DDRC",
+      "PINC",
+      "ADMUX",
+      "ADCSRA",
+      "PCMSK1"
+    ],
+    "aliases": [
+      "A3",
+      "Analog 3",
+      "ADC3",
+      "PC3",
+      "PORTC3",
+      "PCINT11"
+    ],
+    "functions": [
+      "Analog Input",
+      "GPIO",
+      "Pin Change Interrupt"
+    ],
+    "pwm": false,
+    "id": "A3",
+    "displayName": "Analog Pin A3",
+    "category": "analog",
+    "header": "JANALOG",
+    "headerPinNumber": 12,
+    "arduinoPin": "A3",
+    "avrPort": "PORTC",
+    "avrPin": "PC3",
+    "bit": 3,
+    "headerPositionLabel": "Bottom analog header",
+    "physicalLocation": {
+      "x": 414,
+      "y": 338
+    },
+    "pinChangeInterrupt": {
+      "name": "PCINT11",
+      "group": "PCINT[14:8]",
+      "maskRegister": "PCMSK1",
+      "enableRegister": "PCICR",
+      "enableBit": "PCIE1",
+      "flagRegister": "PCIFR",
+      "vector": "PCINT1_vect"
+    },
+    "exampleCode": "\nint value = analogRead(A3);\n"
+  },
+  {
+    "description": "A4 is analog input 4 and AVR pin PC4, but it is also the I2C data line SDA. The UNO R3 duplicates this connection onto the dedicated SDA header position listed in JDIGITAL.",
+    "beginnerExplanation": "This pin is a great beginner example because it exists in both the analog header and the SDA duplicate header position. Search for A4, PC4, SDA, or PCINT12 and you still land on the same microcontroller signal.",
+    "communication": [
+      "I2C SDA"
+    ],
+    "timers": [],
+    "relatedRegisters": [
+      "PORTC",
+      "DDRC",
+      "PINC",
+      "ADMUX",
+      "ADCSRA",
+      "TWBR",
+      "TWCR",
+      "TWSR",
+      "TWDR",
+      "PCMSK1"
+    ],
+    "aliases": [
+      "A4",
+      "Analog 4",
+      "ADC4",
+      "PC4",
+      "PORTC4",
+      "PCINT12",
+      "SDA",
+      "I2C SDA",
+      "TWI SDA"
+    ],
+    "functions": [
+      "Analog Input",
+      "GPIO",
+      "Pin Change Interrupt",
+      "I2C Data"
+    ],
+    "pwm": false,
+    "id": "A4",
+    "displayName": "Analog Pin A4 / SDA",
+    "category": "analog",
+    "header": "JANALOG",
+    "headerPinNumber": 13,
+    "arduinoPin": "A4",
+    "avrPort": "PORTC",
+    "avrPin": "PC4",
+    "bit": 4,
+    "headerPositionLabel": "Bottom analog header, duplicated on top utility row",
+    "physicalLocation": {
+      "x": 423,
+      "y": 338
+    },
+    "secondaryLocations": [
+      {
+        "label": "JDIGITAL pin 17 duplicate",
+        "x": 250,
+        "y": 61
+      }
+    ],
+    "pinChangeInterrupt": {
+      "name": "PCINT12",
+      "group": "PCINT[14:8]",
+      "maskRegister": "PCMSK1",
+      "enableRegister": "PCICR",
+      "enableBit": "PCIE1",
+      "flagRegister": "PCIFR",
+      "vector": "PCINT1_vect"
+    },
+    "exampleCode": "\n#include <Wire.h>\n\nWire.begin(); // Uses SDA on A4 / PC4\n"
+  },
+  {
+    "description": "A5 is analog input 5 and AVR pin PC5, and it also serves as the I2C clock line SCL. The UNO R3 duplicates this signal on the dedicated SCL header position in JDIGITAL.",
+    "beginnerExplanation": "A5 and SCL are not two different wires. They are two common names for the same board connection, depending on whether you are thinking about analog input or I2C communication.",
+    "communication": [
+      "I2C SCL"
+    ],
+    "timers": [],
+    "relatedRegisters": [
+      "PORTC",
+      "DDRC",
+      "PINC",
+      "ADMUX",
+      "ADCSRA",
+      "TWBR",
+      "TWCR",
+      "TWSR",
+      "TWDR",
+      "PCMSK1"
+    ],
+    "aliases": [
+      "A5",
+      "Analog 5",
+      "ADC5",
+      "PC5",
+      "PORTC5",
+      "PCINT13",
+      "SCL",
+      "I2C SCL",
+      "TWI SCL"
+    ],
+    "functions": [
+      "Analog Input",
+      "GPIO",
+      "Pin Change Interrupt",
+      "I2C Clock"
+    ],
+    "pwm": false,
+    "id": "A5",
+    "displayName": "Analog Pin A5 / SCL",
+    "category": "analog",
+    "header": "JANALOG",
+    "headerPinNumber": 14,
+    "arduinoPin": "A5",
+    "avrPort": "PORTC",
+    "avrPin": "PC5",
+    "bit": 5,
+    "headerPositionLabel": "Bottom analog header, duplicated on top utility row",
+    "physicalLocation": {
+      "x": 432,
+      "y": 338
+    },
+    "secondaryLocations": [
+      {
+        "label": "JDIGITAL pin 18 duplicate",
+        "x": 262,
+        "y": 61
+      }
+    ],
+    "pinChangeInterrupt": {
+      "name": "PCINT13",
+      "group": "PCINT[14:8]",
+      "maskRegister": "PCMSK1",
+      "enableRegister": "PCICR",
+      "enableBit": "PCIE1",
+      "flagRegister": "PCIFR",
+      "vector": "PCINT1_vect"
+    },
+    "exampleCode": "\n#include <Wire.h>\n\nWire.begin(); // Uses SCL on A5 / PC5\n"
+  }
+]

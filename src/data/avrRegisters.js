@@ -1,0 +1,230 @@
+export const avrRegisters = {
+  EICRA: {
+    summary: "EICRA controls how external interrupts INT0 and INT1 detect edges or levels.",
+    relatedPins: ["D2", "D3"],
+    beginnerExplanation:
+      "Think of EICRA as the mode dial for the dedicated interrupt pins. It chooses whether the hardware watches for a LOW level, a change, a falling edge, or a rising edge.",
+    bits: {
+      ISC00: {
+        meaning: "INT0 sense control bit 0",
+        relatedPins: ["D2"],
+        affects: "External interrupt mode on D2 / INT0",
+      },
+      ISC01: {
+        meaning: "INT0 sense control bit 1",
+        relatedPins: ["D2"],
+        affects: "External interrupt mode on D2 / INT0",
+      },
+      ISC10: {
+        meaning: "INT1 sense control bit 0",
+        relatedPins: ["D3"],
+        affects: "External interrupt mode on D3 / INT1",
+      },
+      ISC11: {
+        meaning: "INT1 sense control bit 1",
+        relatedPins: ["D3"],
+        affects: "External interrupt mode on D3 / INT1",
+      },
+    },
+  },
+  EIMSK: {
+    summary: "EIMSK enables or disables the dedicated external interrupt lines.",
+    relatedPins: ["D2", "D3"],
+    beginnerExplanation:
+      "If EICRA chooses how an interrupt should trigger, EIMSK is the on/off switch that decides whether the interrupt is allowed to reach the CPU.",
+    bits: {
+      INT0: {
+        meaning: "Enable INT0",
+        relatedPins: ["D2"],
+        affects: "Allows D2 / INT0 to generate an interrupt",
+      },
+      INT1: {
+        meaning: "Enable INT1",
+        relatedPins: ["D3"],
+        affects: "Allows D3 / INT1 to generate an interrupt",
+      },
+    },
+  },
+  EIFR: {
+    summary: "EIFR holds the external interrupt flags.",
+    relatedPins: ["D2", "D3"],
+    beginnerExplanation:
+      "The flag register records that the interrupt condition was seen. Software and hardware use it to keep track of pending interrupt events.",
+    bits: {
+      INTF0: {
+        meaning: "INT0 flag",
+        relatedPins: ["D2"],
+        affects: "Pending interrupt flag for D2 / INT0",
+      },
+      INTF1: {
+        meaning: "INT1 flag",
+        relatedPins: ["D3"],
+        affects: "Pending interrupt flag for D3 / INT1",
+      },
+    },
+  },
+  PCICR: {
+    summary: "PCICR enables the three pin-change interrupt groups.",
+    relatedPins: ["D8", "A4", "D2"],
+    beginnerExplanation:
+      "Pin-change interrupts are grouped by port. PCICR turns on the whole group, and then PCMSK0, PCMSK1, or PCMSK2 chooses which individual pins inside that group matter.",
+    bits: {
+      PCIE0: {
+        meaning: "Enable pin-change group for PORTB",
+        relatedPins: ["D8", "D9", "D10", "D11", "D12", "D13"],
+        affects: "Allows PCINT[7:0] events to interrupt",
+      },
+      PCIE1: {
+        meaning: "Enable pin-change group for PORTC",
+        relatedPins: ["A0", "A1", "A2", "A3", "A4", "A5"],
+        affects: "Allows PCINT[14:8] events to interrupt",
+      },
+      PCIE2: {
+        meaning: "Enable pin-change group for PORTD",
+        relatedPins: ["D0", "D1", "D2", "D3", "D4", "D5", "D6", "D7"],
+        affects: "Allows PCINT[23:16] events to interrupt",
+      },
+    },
+  },
+  PCIFR: {
+    summary: "PCIFR holds the three group pin-change interrupt flags.",
+    relatedPins: ["D8", "A4", "D2"],
+    beginnerExplanation:
+      "When one watched pin changes, the whole group raises a shared flag. Your ISR then checks the actual pin states to figure out which bit moved.",
+    bits: {
+      PCIF0: {
+        meaning: "PORTB pin-change flag",
+        relatedPins: ["D8", "D9", "D10", "D11", "D12", "D13"],
+        affects: "Pending pin-change group flag for PORTB pins",
+      },
+      PCIF1: {
+        meaning: "PORTC pin-change flag",
+        relatedPins: ["A0", "A1", "A2", "A3", "A4", "A5"],
+        affects: "Pending pin-change group flag for PORTC pins",
+      },
+      PCIF2: {
+        meaning: "PORTD pin-change flag",
+        relatedPins: ["D0", "D1", "D2", "D3", "D4", "D5", "D6", "D7"],
+        affects: "Pending pin-change group flag for PORTD pins",
+      },
+    },
+  },
+  PCMSK0: {
+    summary: "PCMSK0 selects which PORTB pins participate in pin-change interrupts.",
+    relatedPins: ["D8", "D9", "D10", "D11", "D12", "D13"],
+    beginnerExplanation:
+      "A group enable alone is not enough. PCMSK0 decides which individual PORTB pins are armed.",
+    bits: {
+      PCINT0: { meaning: "Watch D8 / PB0", relatedPins: ["D8"], affects: "Pin-change source on D8" },
+      PCINT1: { meaning: "Watch D9 / PB1", relatedPins: ["D9"], affects: "Pin-change source on D9" },
+      PCINT2: { meaning: "Watch D10 / PB2", relatedPins: ["D10"], affects: "Pin-change source on D10" },
+      PCINT3: { meaning: "Watch D11 / PB3", relatedPins: ["D11"], affects: "Pin-change source on D11" },
+      PCINT4: { meaning: "Watch D12 / PB4", relatedPins: ["D12"], affects: "Pin-change source on D12" },
+      PCINT5: { meaning: "Watch D13 / PB5", relatedPins: ["D13"], affects: "Pin-change source on D13" },
+    },
+  },
+  PCMSK1: {
+    summary: "PCMSK1 selects which PORTC pins participate in pin-change interrupts.",
+    relatedPins: ["A0", "A1", "A2", "A3", "A4", "A5"],
+    beginnerExplanation:
+      "PCMSK1 is the per-pin mask for the analog-header port pins, including A4/SDA and A5/SCL.",
+    bits: {
+      PCINT8: { meaning: "Watch A0 / PC0", relatedPins: ["A0"], affects: "Pin-change source on A0" },
+      PCINT9: { meaning: "Watch A1 / PC1", relatedPins: ["A1"], affects: "Pin-change source on A1" },
+      PCINT10: { meaning: "Watch A2 / PC2", relatedPins: ["A2"], affects: "Pin-change source on A2" },
+      PCINT11: { meaning: "Watch A3 / PC3", relatedPins: ["A3"], affects: "Pin-change source on A3" },
+      PCINT12: { meaning: "Watch A4 / PC4 / SDA", relatedPins: ["A4"], affects: "Pin-change source on A4/SDA" },
+      PCINT13: { meaning: "Watch A5 / PC5 / SCL", relatedPins: ["A5"], affects: "Pin-change source on A5/SCL" },
+    },
+  },
+  PCMSK2: {
+    summary: "PCMSK2 selects which PORTD pins participate in pin-change interrupts.",
+    relatedPins: ["D0", "D1", "D2", "D3", "D4", "D5", "D6", "D7"],
+    beginnerExplanation:
+      "PCMSK2 is how you choose individual watched pins inside the PORTD pin-change group.",
+    bits: {
+      PCINT16: { meaning: "Watch D0 / PD0", relatedPins: ["D0"], affects: "Pin-change source on D0" },
+      PCINT17: { meaning: "Watch D1 / PD1", relatedPins: ["D1"], affects: "Pin-change source on D1" },
+      PCINT18: { meaning: "Watch D2 / PD2", relatedPins: ["D2"], affects: "Pin-change source on D2" },
+      PCINT19: { meaning: "Watch D3 / PD3", relatedPins: ["D3"], affects: "Pin-change source on D3" },
+      PCINT20: { meaning: "Watch D4 / PD4", relatedPins: ["D4"], affects: "Pin-change source on D4" },
+      PCINT21: { meaning: "Watch D5 / PD5", relatedPins: ["D5"], affects: "Pin-change source on D5" },
+      PCINT22: { meaning: "Watch D6 / PD6", relatedPins: ["D6"], affects: "Pin-change source on D6" },
+      PCINT23: { meaning: "Watch D7 / PD7", relatedPins: ["D7"], affects: "Pin-change source on D7" },
+    },
+  },
+  TCCR1A: {
+    summary: "TCCR1A configures Timer1 compare outputs and part of the waveform mode.",
+    relatedPins: ["D9", "D10"],
+    beginnerExplanation:
+      "This register decides how Timer1's compare hardware connects to the physical output pins. That is why D9 and D10 care about it.",
+    bits: {
+      COM1A1: { meaning: "Timer1 compare output behavior for OC1A", relatedPins: ["D9"], affects: "Output waveform on D9 / OC1A" },
+      COM1A0: { meaning: "Timer1 compare output behavior for OC1A", relatedPins: ["D9"], affects: "Output waveform on D9 / OC1A" },
+      COM1B1: { meaning: "Timer1 compare output behavior for OC1B", relatedPins: ["D10"], affects: "Output waveform on D10 / OC1B" },
+      COM1B0: { meaning: "Timer1 compare output behavior for OC1B", relatedPins: ["D10"], affects: "Output waveform on D10 / OC1B" },
+      WGM10: { meaning: "Waveform generation mode bit", relatedPins: ["D9", "D10"], affects: "Timer1 counting/PWM mode" },
+      WGM11: { meaning: "Waveform generation mode bit", relatedPins: ["D9", "D10"], affects: "Timer1 counting/PWM mode" },
+    },
+  },
+  TCCR1B: {
+    summary: "TCCR1B configures Timer1 clock source, waveform mode bits, and input capture options.",
+    relatedPins: ["D8", "D9", "D10"],
+    beginnerExplanation:
+      "This is one of the main Timer1 control registers. Prescaler bits decide how fast the counter runs, while input-capture and waveform bits influence the hardware linked to D8, D9, and D10.",
+    bits: {
+      CS10: { meaning: "Clock select bit 0", relatedPins: ["D9", "D10"], affects: "Timer1 clock/prescaler selection" },
+      CS11: { meaning: "Clock select bit 1", relatedPins: ["D9", "D10"], affects: "Timer1 clock/prescaler selection" },
+      CS12: { meaning: "Clock select bit 2", relatedPins: ["D9", "D10"], affects: "Timer1 clock/prescaler selection" },
+      WGM12: { meaning: "Waveform generation mode bit", relatedPins: ["D9", "D10"], affects: "CTC/PWM mode selection" },
+      WGM13: { meaning: "Waveform generation mode bit", relatedPins: ["D9", "D10"], affects: "CTC/PWM mode selection" },
+      ICES1: { meaning: "Input capture edge select", relatedPins: ["D8"], affects: "Which edge Timer1 captures on D8 / ICP1" },
+      ICNC1: { meaning: "Input capture noise canceler", relatedPins: ["D8"], affects: "Filtering behavior for D8 / ICP1 capture" },
+    },
+  },
+  TCNT1: {
+    summary: "TCNT1 is the 16-bit Timer1 counter value.",
+    relatedPins: ["D8", "D9", "D10"],
+    beginnerExplanation:
+      "This register is the timer's running count. Compare registers and capture logic all react to this value as it changes over time.",
+    bits: {},
+  },
+  OCR1A: {
+    summary: "OCR1A holds the compare target for Timer1 channel A.",
+    relatedPins: ["D9"],
+    beginnerExplanation:
+      "When TCNT1 matches OCR1A, hardware can set a flag, trigger an interrupt, or change the OC1A output tied to D9.",
+    bits: {},
+  },
+  OCR1B: {
+    summary: "OCR1B holds the compare target for Timer1 channel B.",
+    relatedPins: ["D10"],
+    beginnerExplanation:
+      "This compare register does for D10 / OC1B what OCR1A does for D9 / OC1A.",
+    bits: {},
+  },
+  TIMSK1: {
+    summary: "TIMSK1 enables Timer1 interrupt sources.",
+    relatedPins: ["D8", "D9", "D10"],
+    beginnerExplanation:
+      "Timer flags do not automatically interrupt the CPU. TIMSK1 is where you choose which Timer1 events are allowed to raise an ISR.",
+    bits: {
+      TOIE1: { meaning: "Enable Timer1 overflow interrupt", relatedPins: ["D9", "D10"], affects: "Timer1 overflow ISR enable" },
+      OCIE1A: { meaning: "Enable Timer1 compare A interrupt", relatedPins: ["D9"], affects: "Compare-match interrupt tied to OCR1A / D9 timing" },
+      OCIE1B: { meaning: "Enable Timer1 compare B interrupt", relatedPins: ["D10"], affects: "Compare-match interrupt tied to OCR1B / D10 timing" },
+      ICIE1: { meaning: "Enable Timer1 input capture interrupt", relatedPins: ["D8"], affects: "Input capture interrupt on D8 / ICP1" },
+    },
+  },
+  TIFR1: {
+    summary: "TIFR1 holds Timer1 event flags.",
+    relatedPins: ["D8", "D9", "D10"],
+    beginnerExplanation:
+      "A timer event usually sets a flag first. The ISR machinery and your code can then react to those pending event bits.",
+    bits: {
+      TOV1: { meaning: "Timer1 overflow flag", relatedPins: ["D9", "D10"], affects: "Overflow event flag" },
+      OCF1A: { meaning: "Timer1 compare A flag", relatedPins: ["D9"], affects: "Compare-match flag for OCR1A" },
+      OCF1B: { meaning: "Timer1 compare B flag", relatedPins: ["D10"], affects: "Compare-match flag for OCR1B" },
+      ICF1: { meaning: "Timer1 input capture flag", relatedPins: ["D8"], affects: "Input capture flag for D8 / ICP1" },
+    },
+  },
+};
