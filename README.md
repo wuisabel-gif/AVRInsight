@@ -55,7 +55,7 @@ This project is configured for GitHub Pages project-site hosting at:
 Important notes:
 
 - Vite must build with the base path `/AVRInsight/`, otherwise the deployed page will load a blank screen because the asset URLs will point to `/assets/...` instead of `/AVRInsight/assets/...`.
-- The included GitHub Actions workflow in `.github/workflows/deploy-pages.yml` builds and deploys the `dist/` folder automatically from `main`.
+- The included GitHub Actions workflow in `.github/workflows/deploy.yml` builds and deploys the `dist/` folder automatically from `main`.
 - The frontend can be hosted on GitHub Pages, but the Phase 2 backend cannot. The "Ask Debugger" tab will only work if you deploy the backend separately and set `VITE_BACKEND_URL` to that live backend URL.
 
 ## Environment Setup
