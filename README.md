@@ -46,6 +46,18 @@ Refresh the frontend JSON data files from the educational JS metadata:
 pnpm export:data
 ```
 
+## GitHub Pages
+
+This project is configured for GitHub Pages project-site hosting at:
+
+`https://wuisabel-gif.github.io/AVRInsight/`
+
+Important notes:
+
+- Vite must build with the base path `/AVRInsight/`, otherwise the deployed page will load a blank screen because the asset URLs will point to `/assets/...` instead of `/AVRInsight/assets/...`.
+- The included GitHub Actions workflow in `.github/workflows/deploy-pages.yml` builds and deploys the `dist/` folder automatically from `main`.
+- The frontend can be hosted on GitHub Pages, but the Phase 2 backend cannot. The "Ask Debugger" tab will only work if you deploy the backend separately and set `VITE_BACKEND_URL` to that live backend URL.
+
 ## Environment Setup
 
 This repo is safe to push only if your real API key stays out of Git and out of the frontend.
