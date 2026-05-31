@@ -2,9 +2,7 @@
 
 Built an interactive embedded systems learning tool for the Arduino UNO R3 / ATmega328P that visually connects board pins to "AVR registers", "interrupts", "timers", and "communication roles". Features include searchable pin aliases, interactive board mapping, register decoding, timer and interrupt visualization, and guided debugging support.
 
-## Keywords
-
-"Arduino UNO R3", "ATmega328P", "Embedded Systems", "AVR Registers", "Interrupts", "Timers", "PWM", "GPIO", "SPI", "I2C", "Pin Mapping", "Register Decoder", "React", "SVG Visualization", "Frontend Engineering", "Educational Tool", "Debugging Assistant"
+**Keywords:** `Arduino UNO R3` · `ATmega328P` · `Embedded Systems` · `AVR Architecture` · `Register-Level Programming` · `Interrupts` · `Timers` · `PWM` · `GPIO` · `SPI` · `I2C` · `Pin Mapping` · `Register Visualization` · `React` · `SVG` · `Frontend Development` · `Educational Software` · `Debugging Tools`
 
 ## What It Includes
 
