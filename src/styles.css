@@ -615,6 +615,11 @@ pre {
   stroke-width: 1.8;
 }
 
+.header-group-divider {
+  stroke: rgba(22, 26, 31, 0.18);
+  stroke-width: 1.8;
+}
+
 .board-caption-hardware {
   font-size: 9px;
   letter-spacing: 0.14em;

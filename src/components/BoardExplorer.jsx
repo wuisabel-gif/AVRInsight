@@ -28,7 +28,7 @@ const layout = {
   power: {
     ids: ["3V3", "5V", "GND", "GND", "VIN"],
     x: 802,
-    y: 588,
+    y: 640,
     gap: 32,
   },
   analog: {
@@ -218,12 +218,9 @@ export default function BoardExplorer({ pins, selectedPin, relatedIds, onSelectP
                 {boardCaption("JBREAKOUT", 701, 564, "board-caption-hardware")}
               </g>
               <g className="header-group-box">
-                <rect x="780" y="548" width="156" height="116" rx="18" />
-                {boardCaption("POWER", 858, 564, "board-caption-hardware")}
-              </g>
-              <g className="header-group-box">
-                <rect x="1010" y="548" width="166" height="128" rx="18" />
-                {boardCaption("ANALOG", 1093, 564, "board-caption-hardware")}
+                <rect x="780" y="548" width="420" height="128" rx="18" />
+                {boardCaption("RIGHT HEADER GROUP", 990, 564, "board-caption-hardware")}
+                <line className="header-group-divider" x1="966" y1="568" x2="966" y2="662" />
               </g>
 
               {decorativePads(664, 582, 3, 34)}
@@ -231,9 +228,8 @@ export default function BoardExplorer({ pins, selectedPin, relatedIds, onSelectP
               {decorativePads(664, 640, 3, 34)}
               {decorativePads(802, 588, 5, 32)}
               {decorativePads(802, 626, 5, 32)}
-              {decorativePads(1022, 582, 6, 24)}
-              {decorativePads(1022, 611, 6, 24)}
-              {decorativePads(1022, 640, 6, 24)}
+              {decorativePads(1022, 588, 6, 24)}
+              {decorativePads(1022, 626, 6, 24)}
 
               {boardCaption("LCD KEYPAD SHIELD", 620, 94, "board-caption-title")}
               {boardCaption("JDIGITAL", 906, 86)}
@@ -241,9 +237,9 @@ export default function BoardExplorer({ pins, selectedPin, relatedIds, onSelectP
               {boardCaption("GND", 626, 586, "board-caption-row")}
               {boardCaption("VCC", 626, 615, "board-caption-row")}
               {boardCaption("S", 626, 644, "board-caption-row")}
-              {boardCaption("GND", 982, 586, "board-caption-row")}
-              {boardCaption("VCC", 982, 615, "board-caption-row")}
-              {boardCaption("S", 982, 644, "board-caption-row")}
+              {boardCaption("GND", 760, 592, "board-caption-row")}
+              {boardCaption("VCC", 760, 630, "board-caption-row")}
+              {boardCaption("S", 760, 668, "board-caption-row")}
 
               {layout.digitalUpper.ids.map((id, index) =>
                 headerLabel(id, layout.digitalUpper.x + index * layout.digitalUpper.gap, 32, "vertical"),
