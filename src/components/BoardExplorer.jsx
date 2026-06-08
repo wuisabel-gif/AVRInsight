@@ -74,6 +74,14 @@ function decorativePads(x, y, count, gap) {
   });
 }
 
+function decorativePadGrid(x, y, rows, columns, columnGap, rowGap) {
+  return Array.from({ length: rows }, (_, rowIndex) =>
+    decorativePads(x, y + rowIndex * rowGap, columns, columnGap).map((pad, index) => (
+      <g key={`grid-${x}-${y}-${rowIndex}-${index}`}>{pad}</g>
+    )),
+  ).flat();
+}
+
 function headerLabel(id, x, y, className = "") {
   return (
     <text key={`${id}-${x}-${y}`} className={`board-label ${className}`.trim()} x={x} y={y}>
@@ -223,13 +231,9 @@ export default function BoardExplorer({ pins, selectedPin, relatedIds, onSelectP
                 <line className="header-group-divider" x1="966" y1="568" x2="966" y2="662" />
               </g>
 
-              {decorativePads(664, 582, 3, 34)}
-              {decorativePads(664, 611, 3, 34)}
-              {decorativePads(664, 640, 3, 34)}
-              {decorativePads(802, 588, 5, 32)}
-              {decorativePads(802, 626, 5, 32)}
-              {decorativePads(1022, 588, 6, 24)}
-              {decorativePads(1022, 626, 6, 24)}
+              {decorativePadGrid(664, 582, 3, 3, 34, 29)}
+              {decorativePadGrid(802, 582, 3, 5, 32, 29)}
+              {decorativePadGrid(1022, 582, 3, 6, 24, 29)}
 
               {boardCaption("LCD KEYPAD SHIELD", 620, 94, "board-caption-title")}
               {boardCaption("JDIGITAL", 906, 86)}
@@ -237,9 +241,9 @@ export default function BoardExplorer({ pins, selectedPin, relatedIds, onSelectP
               {boardCaption("GND", 626, 586, "board-caption-row")}
               {boardCaption("VCC", 626, 615, "board-caption-row")}
               {boardCaption("S", 626, 644, "board-caption-row")}
-              {boardCaption("GND", 760, 592, "board-caption-row")}
-              {boardCaption("VCC", 760, 630, "board-caption-row")}
-              {boardCaption("S", 760, 668, "board-caption-row")}
+              {boardCaption("GND", 760, 586, "board-caption-row")}
+              {boardCaption("VCC", 760, 615, "board-caption-row")}
+              {boardCaption("S", 760, 644, "board-caption-row")}
 
               {layout.digitalUpper.ids.map((id, index) =>
                 headerLabel(id, layout.digitalUpper.x + index * layout.digitalUpper.gap, 32, "vertical"),
