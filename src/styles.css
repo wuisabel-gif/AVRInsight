@@ -494,21 +494,22 @@ pre {
 }
 
 .board-lcd-text {
-  font-size: 32px;
+  font-size: clamp(26px, 2.2vw, 36px);
+  font-weight: 700;
 }
 
 .board-lcd-subtext {
-  font-size: 20px;
+  font-size: clamp(17px, 1.35vw, 22px);
 }
 
 .board-note {
   font-family: "SFMono-Regular", "SF Mono", Consolas, monospace;
-  font-size: 18px;
+  font-size: clamp(11px, 0.9vw, 12px);
   fill: #2847c9;
 }
 
 .board-note-sm {
-  font-size: 15px;
+  font-size: clamp(11px, 0.9vw, 12px);
 }
 
 .board-note.green {
@@ -526,13 +527,13 @@ pre {
 
 .board-ui-label {
   font-family: "SFMono-Regular", "SF Mono", Consolas, monospace;
-  font-size: 12px;
+  font-size: clamp(11px, 1vw, 13px);
   fill: #2b48bf;
   letter-spacing: 0.08em;
 }
 
 .board-label {
-  font-size: 11px;
+  font-size: clamp(10px, 0.9vw, 11px);
   font-weight: 700;
   fill: #178c44;
   text-anchor: middle;
@@ -548,7 +549,7 @@ pre {
 }
 
 .board-caption {
-  font-size: 10px;
+  font-size: clamp(12px, 1vw, 14px);
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -557,7 +558,7 @@ pre {
 }
 
 .board-caption-title {
-  font-size: 11px;
+  font-size: clamp(13px, 1.05vw, 14px);
   letter-spacing: 0.22em;
   fill: rgba(17, 24, 35, 0.7);
 }
@@ -582,7 +583,7 @@ pre {
 
 .button-zone-caption {
   fill: rgba(17, 24, 35, 0.72);
-  font-size: 10px;
+  font-size: clamp(12px, 1vw, 13px);
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -596,7 +597,7 @@ pre {
 .shield-button-label,
 .reset-label {
   fill: #2640b0;
-  font-size: 10px;
+  font-size: clamp(11px, 0.95vw, 12px);
   font-weight: 700;
   letter-spacing: 0.08em;
 }
@@ -631,13 +632,13 @@ pre {
 }
 
 .board-caption-hardware {
-  font-size: 9px;
+  font-size: clamp(12px, 1vw, 13px);
   letter-spacing: 0.14em;
   fill: rgba(17, 24, 35, 0.62);
 }
 
 .board-caption-row {
-  font-size: 8px;
+  font-size: clamp(10px, 0.9vw, 11px);
   letter-spacing: 0.16em;
   fill: rgba(17, 24, 35, 0.5);
 }
