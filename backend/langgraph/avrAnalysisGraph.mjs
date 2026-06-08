@@ -2,7 +2,7 @@ import { END, START, StateGraph, StateSchema } from "@langchain/langgraph";
 import * as z from "zod";
 import { avrRegisters } from "../../src/data/avrRegisters.js";
 import { unoPins } from "../../src/data/unoPins.js";
-import { explainWithOpenAI } from "../openai/explainWithOpenAI.mjs";
+import { explainWithGemini } from "../gemini/explainWithGemini.mjs";
 
 const AnalysisState = new StateSchema({
   userQuery: z.string().default(""),
@@ -548,7 +548,7 @@ async function llmReasoningNode(state) {
   }
 
   try {
-    const result = await explainWithOpenAI({
+    const result = await explainWithGemini({
       userQuery: state.userQuery,
       codeSnippet: state.codeSnippet,
       detectedMode: state.detectedMode,
@@ -575,9 +575,9 @@ async function llmReasoningNode(state) {
       llmReasoning: {
         enabled: true,
         status: "error",
-        model: process.env.OPENAI_MODEL || "gpt-5.5",
+        model: process.env.GEMINI_MODEL || "gemini-2.5-flash",
         explanation: "",
-        error: error instanceof Error ? error.message : "Unknown OpenAI reasoning error",
+        error: error instanceof Error ? error.message : "Unknown Gemini reasoning error",
       },
     };
   }

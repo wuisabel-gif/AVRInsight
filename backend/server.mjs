@@ -42,7 +42,7 @@ const server = http.createServer(async (req, res) => {
           ok: true,
           result,
           meta: {
-            llmAvailable: Boolean(process.env.OPENAI_API_KEY),
+            llmAvailable: Boolean(process.env.GEMINI_API_KEY),
             requestedLlm: Boolean(input.useLlm),
           },
         });

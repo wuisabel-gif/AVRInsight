@@ -10,16 +10,13 @@ importers:
     dependencies:
       '@langchain/core':
         specifier: ^1.1.47
-        version: 1.1.47(openai@6.38.0(zod@4.4.3))
+        version: 1.1.47
       '@langchain/langgraph':
         specifier: ^1.3.2
-        version: 1.3.2(@langchain/core@1.1.47(openai@6.38.0(zod@4.4.3)))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(zod@4.4.3)
+        version: 1.3.2(@langchain/core@1.1.47)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(zod@4.4.3)
       framer-motion:
         specifier: ^12.39.0
         version: 12.39.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
-      openai:
-        specifier: ^6.38.0
-        version: 6.38.0(zod@4.4.3)
       react:
         specifier: ^19.2.6
         version: 19.2.6
@@ -379,18 +376,6 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  openai@6.38.0:
-    resolution: {integrity: sha512-AoMplt2UalrpgUDMh3L09QWjNRlgJPipclQvA6sYAaeF6nHNBMgmikAZGmcYLn8on4d9sQY9Q8bOLfrBS7Lc8g==}
-    hasBin: true
-    peerDependencies:
-      ws: ^8.18.0
-      zod: ^3.25 || ^4.0
-    peerDependenciesMeta:
-      ws:
-        optional: true
-      zod:
-        optional: true
-
   p-finally@1.0.0:
     resolution: {integrity: sha512-LICb2p9CB7FS+0eR1oqWnHhp0FljGLZCWBE9aix0Uye9W8LTQPwMTYVGWQWIw9RdQiDg4+epXQODwIYJtSJaow==}
     engines: {node: '>=4'}
@@ -529,12 +514,12 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
-  '@langchain/core@1.1.47(openai@6.38.0(zod@4.4.3))':
+  '@langchain/core@1.1.47':
     dependencies:
       '@cfworker/json-schema': 4.1.1
       '@standard-schema/spec': 1.1.0
       js-tiktoken: 1.0.21
-      langsmith: 0.7.1(openai@6.38.0(zod@4.4.3))
+      langsmith: 0.7.1
       mustache: 4.2.0
       p-queue: 6.6.2
       zod: 4.4.3
@@ -545,14 +530,14 @@ snapshots:
       - openai
       - ws
 
-  '@langchain/langgraph-checkpoint@1.0.2(@langchain/core@1.1.47(openai@6.38.0(zod@4.4.3)))':
+  '@langchain/langgraph-checkpoint@1.0.2(@langchain/core@1.1.47)':
     dependencies:
-      '@langchain/core': 1.1.47(openai@6.38.0(zod@4.4.3))
+      '@langchain/core': 1.1.47
       uuid: 10.0.0
 
-  '@langchain/langgraph-sdk@1.9.4(@langchain/core@1.1.47(openai@6.38.0(zod@4.4.3)))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
+  '@langchain/langgraph-sdk@1.9.4(@langchain/core@1.1.47)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)':
     dependencies:
-      '@langchain/core': 1.1.47(openai@6.38.0(zod@4.4.3))
+      '@langchain/core': 1.1.47
       '@langchain/protocol': 0.0.15
       '@types/json-schema': 7.0.15
       p-queue: 9.3.0
@@ -562,11 +547,11 @@ snapshots:
       react: 19.2.6
       react-dom: 19.2.6(react@19.2.6)
 
-  '@langchain/langgraph@1.3.2(@langchain/core@1.1.47(openai@6.38.0(zod@4.4.3)))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(zod@4.4.3)':
+  '@langchain/langgraph@1.3.2(@langchain/core@1.1.47)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(zod@4.4.3)':
     dependencies:
-      '@langchain/core': 1.1.47(openai@6.38.0(zod@4.4.3))
-      '@langchain/langgraph-checkpoint': 1.0.2(@langchain/core@1.1.47(openai@6.38.0(zod@4.4.3)))
-      '@langchain/langgraph-sdk': 1.9.4(@langchain/core@1.1.47(openai@6.38.0(zod@4.4.3)))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      '@langchain/core': 1.1.47
+      '@langchain/langgraph-checkpoint': 1.0.2(@langchain/core@1.1.47)
+      '@langchain/langgraph-sdk': 1.9.4(@langchain/core@1.1.47)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
       '@langchain/protocol': 0.0.15
       '@standard-schema/spec': 1.1.0
       uuid: 10.0.0
@@ -683,11 +668,9 @@ snapshots:
     dependencies:
       base64-js: 1.5.1
 
-  langsmith@0.7.1(openai@6.38.0(zod@4.4.3)):
+  langsmith@0.7.1:
     dependencies:
       p-queue: 6.6.2
-    optionalDependencies:
-      openai: 6.38.0(zod@4.4.3)
 
   lightningcss-android-arm64@1.32.0:
     optional: true
@@ -747,10 +730,6 @@ snapshots:
   mustache@4.2.0: {}
 
   nanoid@3.3.12: {}
-
-  openai@6.38.0(zod@4.4.3):
-    optionalDependencies:
-      zod: 4.4.3
 
   p-finally@1.0.0: {}
 

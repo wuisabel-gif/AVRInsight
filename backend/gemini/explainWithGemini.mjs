@@ -1,14 +1,3 @@
-import OpenAI from "openai";
-
-function createClient() {
-  const apiKey = process.env.OPENAI_API_KEY;
-  if (!apiKey) {
-    return null;
-  }
-
-  return new OpenAI({ apiKey });
-}
-
 function buildPrompt(payload) {
   return [
     "You are an AVR and Arduino debugging assistant.",
@@ -49,52 +38,69 @@ function buildPrompt(payload) {
   ].join("\n");
 }
 
-export async function explainWithOpenAI(payload) {
-  const defaultModel = process.env.OPENAI_MODEL || "gpt-5.5";
-  const defaultReasoningEffort = process.env.OPENAI_REASONING_EFFORT || "medium";
-  const client = createClient();
-  if (!client) {
+function extractText(response) {
+  const parts = response?.candidates?.[0]?.content?.parts || [];
+  return parts
+    .map((part) => part?.text || "")
+    .filter(Boolean)
+    .join("\n")
+    .trim();
+}
+
+export async function explainWithGemini(payload) {
+  const apiKey = process.env.GEMINI_API_KEY;
+  const defaultModel = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+
+  if (!apiKey) {
     return {
       enabled: false,
       status: "skipped",
       model: "",
       explanation: "",
-      error: "OPENAI_API_KEY is not set, so the optional LLM reasoning step was skipped.",
+      error: "GEMINI_API_KEY is not set, so the optional LLM reasoning step was skipped.",
     };
   }
 
-  const response = await client.responses.create({
-    model: defaultModel,
-    reasoning: {
-      effort: defaultReasoningEffort,
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(defaultModel)}:generateContent?key=${encodeURIComponent(apiKey)}`;
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
     },
-    input: [
-      {
-        role: "system",
-        content: [
+    body: JSON.stringify({
+      systemInstruction: {
+        parts: [
           {
-            type: "input_text",
             text: "You explain AVR/Arduino interrupt and timer bugs carefully and accurately.",
           },
         ],
       },
-      {
-        role: "user",
-        content: [
-          {
-            type: "input_text",
-            text: buildPrompt(payload),
-          },
-        ],
+      contents: [
+        {
+          role: "user",
+          parts: [
+            {
+              text: buildPrompt(payload),
+            },
+          ],
+        },
+      ],
+      generationConfig: {
+        temperature: 0.2,
       },
-    ],
+    }),
   });
+
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data?.error?.message || `Gemini request failed with status ${response.status}.`);
+  }
 
   return {
     enabled: true,
     status: "completed",
     model: defaultModel,
-    explanation: response.output_text || "",
+    explanation: extractText(data),
     error: "",
   };
 }

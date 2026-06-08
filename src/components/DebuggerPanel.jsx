@@ -72,7 +72,7 @@ export default function DebuggerPanel({
               checked={useLlm}
               onChange={(event) => onChangeUseLlm(event.target.checked)}
             />
-            <span>Use OpenAI reasoning layer</span>
+            <span>Use Gemini reasoning layer</span>
           </label>
           <button type="button" className="primary-button" disabled={loading} onClick={onRun}>
             {loading ? "Analyzing..." : "Analyze Issue"}
@@ -137,7 +137,7 @@ export default function DebuggerPanel({
       </section>
 
       <section className="detail-card">
-        <h3>OpenAI Reasoning Layer</h3>
+        <h3>Gemini Reasoning Layer</h3>
         {result ? (
           <>
             <div className="llm-meta">
@@ -151,7 +151,7 @@ export default function DebuggerPanel({
             )}
           </>
         ) : (
-          <p className="muted">When enabled, the backend can layer an OpenAI explanation on top of the deterministic AVR checks.</p>
+          <p className="muted">When enabled, the backend can layer a Gemini explanation on top of the deterministic AVR checks.</p>
         )}
       </section>
     </>
