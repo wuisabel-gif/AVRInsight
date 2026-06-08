@@ -2,7 +2,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
-		"build": "vite build",
+		"build": "vite build && node scripts/prepare-local-preview.mjs",
 		"preview": "vite preview",
 		"export:data": "node scripts/export-data.mjs",
 		"backend": "node backend/server.mjs",

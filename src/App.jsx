@@ -138,7 +138,15 @@ export default function App() {
           </p>
         </section>
 
-        <section className="sidebar-card">
+        <section className="sidebar-card controls-card">
+          <div className="section-heading compact">
+            <div>
+              <div className="section-kicker">Pin Navigator</div>
+              <h2>Find a pin by any hardware name</h2>
+            </div>
+            <p>Search board names, AVR ports, timer channels, interrupt labels, and bus aliases.</p>
+          </div>
+
           <label className="search-label" htmlFor="pin-search">
             Search aliases
           </label>
@@ -164,6 +172,11 @@ export default function App() {
             ))}
           </div>
 
+          <div className="list-heading">
+            <span>Matching pins</span>
+            <span>{filteredPins.length}</span>
+          </div>
+
           <div className="result-list">
             {filteredPins.slice(0, 12).map((pin) => (
               <button
@@ -179,8 +192,6 @@ export default function App() {
             {filteredPins.length === 0 ? <p className="muted">No pins matched the current search.</p> : null}
           </div>
         </section>
-
-        <PinInfoPanel pin={selectedPin} />
       </aside>
 
       <main className="main-panel">
@@ -203,15 +214,28 @@ export default function App() {
         </nav>
 
         {activeTab === "map" ? (
-          <>
+          <section className="map-workspace">
             <BoardExplorer
               pins={unoPins}
               selectedPin={selectedPin}
               relatedIds={relatedIds}
               onSelectPin={setSelectedPinId}
             />
+            <section className="pin-reference-section">
+              <div className="section-heading">
+                <div>
+                  <div className="section-kicker">Selected Pin Reference</div>
+                  <h2>{selectedPin.id} overview</h2>
+                </div>
+                <p>
+                  Keep the board on screen while you scan aliases, registers, timer links, and
+                  interrupt behavior for the currently selected pin.
+                </p>
+              </div>
+              <PinInfoPanel pin={selectedPin} />
+            </section>
             <TimerAnimation pin={selectedPin} />
-          </>
+          </section>
         ) : null}
 
         {activeTab === "interrupts" ? (
