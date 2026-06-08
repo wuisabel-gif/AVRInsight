@@ -401,7 +401,8 @@ pre {
 
 .board-stage {
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
   border-radius: 20px;
   padding: clamp(18px, 2.6vw, 32px);
   border: 1px solid rgba(130, 161, 190, 0.12);
@@ -409,17 +410,20 @@ pre {
     radial-gradient(circle at 50% 28%, rgba(94, 200, 255, 0.08), transparent 40%),
     linear-gradient(180deg, #0b131d 0%, #09131d 100%);
   min-height: clamp(480px, 60vw, 700px);
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .board-viewer {
   width: min(78%, 960px);
   height: min(72%, 620px);
   min-height: 380px;
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 auto;
+  overflow-x: hidden;
 }
 
 .board-svg {
@@ -615,6 +619,12 @@ pre {
   font-size: 9px;
   letter-spacing: 0.14em;
   fill: rgba(17, 24, 35, 0.62);
+}
+
+.board-caption-row {
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  fill: rgba(17, 24, 35, 0.5);
 }
 
 .board-pad {
@@ -1036,18 +1046,22 @@ pre {
   }
 
   .board-stage {
-    padding: 10px;
+    padding: 12px 8px;
     min-height: auto;
   }
 
   .board-viewer {
-    width: min(94%, 100%);
+    width: 100%;
     height: auto;
     min-height: auto;
+    overflow-x: hidden;
   }
 
   .board-svg {
+    width: 100%;
     max-width: 100%;
+    height: auto;
+    margin: 0 auto;
   }
 
   .hero-card h1 {
