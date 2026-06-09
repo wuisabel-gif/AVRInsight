@@ -474,6 +474,12 @@ pre {
   stroke-width: 1.2;
 }
 
+.header-strip {
+  fill: rgba(17, 24, 35, 0.94);
+  stroke: rgba(22, 26, 31, 0.96);
+  stroke-width: 1.4;
+}
+
 .board-lcd-text,
 .board-note,
 .board-lcd-subtext,
@@ -536,6 +542,13 @@ pre {
 
 .reserved-box {
   fill: rgba(17, 24, 35, 0.96);
+}
+
+.reserved-box-inner {
+  fill: none;
+  stroke: rgba(246, 244, 235, 0.28);
+  stroke-width: 1;
+  stroke-dasharray: 5 5;
 }
 
 .potentiometer-dot {
@@ -619,18 +632,20 @@ pre {
 
 .button-terminal-dot {
   fill: rgba(17, 24, 35, 0.96);
+  stroke: rgba(22, 26, 31, 0.96);
+  stroke-width: 1.2;
 }
 
 .button-center {
   fill: #f6f4eb;
   stroke: rgba(17, 24, 35, 0.96);
-  stroke-width: 4;
+  stroke-width: 3.4;
 }
 
 .button-terminal-line,
 .button-side-line {
   stroke: rgba(17, 24, 35, 0.96);
-  stroke-width: 4;
+  stroke-width: 3.2;
   stroke-linecap: square;
 }
 

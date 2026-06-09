@@ -256,10 +256,10 @@ export default function BoardExplorer({ pins, selectedPin, relatedIds, onSelectP
               <circle className="potentiometer-dot" cx="105" cy="96" r="12" />
               <circle className="potentiometer-dot" cx="179" cy="96" r="12" />
               <circle className="potentiometer-dot" cx="141" cy="138" r="12" />
-              <rect className="reserved-box" x="270" y="54" width="284" height="134" rx="2" />
-              <rect className="reserved-box-inner" x="282" y="66" width="260" height="110" rx="2" />
-              <text className="reserved-label" x="412" y="112">Reserved</text>
-              <text className="reserved-label" x="412" y="150">Pins</text>
+              <rect className="reserved-box" x="250" y="54" width="264" height="134" rx="2" />
+              <rect className="reserved-box-inner" x="262" y="66" width="240" height="110" rx="2" />
+              <text className="reserved-label" x="372" y="112">Reserved</text>
+              <text className="reserved-label" x="372" y="150">Pins</text>
 
               <line className="board-divider" x1="32" y1="196" x2="1358" y2="196" />
               <line className="board-divider" x1="32" y1="556" x2="1358" y2="556" />
@@ -286,8 +286,8 @@ export default function BoardExplorer({ pins, selectedPin, relatedIds, onSelectP
               <g className={`button-zone ${showKeypadHardware ? "show-hardware" : ""}`}>
                 <ButtonFootprint label="SELECT" x={104} y={668} />
                 <ButtonFootprint label="LEFT" x={246} y={668} />
-                <ButtonFootprint label="UP" x={396} y={626} labelX={346} labelY={594} />
-                <ButtonFootprint label="DOWN" x={396} y={700} labelX={338} labelY={744} />
+                <ButtonFootprint label="UP" x={396} y={606} labelX={346} labelY={614} />
+                <ButtonFootprint label="DOWN" x={396} y={680} labelX={338} labelY={650} />
                 <ButtonFootprint label="RIGHT" x={552} y={668} />
 
                 <g className="button-zone-hardware">
@@ -301,8 +301,7 @@ export default function BoardExplorer({ pins, selectedPin, relatedIds, onSelectP
               </g>
 
               <g className="header-group-box">
-                <rect className="reserved-box" x="782" y="602" width="244" height="132" rx="2" />
-                <rect className="reserved-box-inner" x="794" y="614" width="220" height="108" rx="2" />
+                <rect className="reserved-box" x="782" y="592" width="244" height="132" rx="2" />
                 <text className="reserved-label" x="904" y="664">Reserved</text>
                 <text className="reserved-label" x="904" y="702">Pins</text>
               </g>
