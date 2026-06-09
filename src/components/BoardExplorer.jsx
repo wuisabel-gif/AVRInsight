@@ -1,41 +1,46 @@
 import { motion } from "framer-motion";
 
 const layout = {
-  digitalUpper: {
-    ids: ["D13", "D12", "D11", "D10", "D9", "D8"],
-    x: 754,
-    y: 98,
-    gap: 51,
+  serialHeader: {
+    ids: ["GND", "5V", "D1", "D0"],
+    labels: ["GND", "VCC", "TX", "RX"],
+    x: 548,
+    y: 92,
+    gap: 43,
   },
-  digitalLower: {
-    ids: ["D7", "D6", "D5", "D4", "D3", "D2", "D1", "D0"],
-    x: 605,
-    y: 152,
-    gap: 51,
+  digitalUpper: {
+    ids: ["D13", "D12", "D11", "D3", "D2", "D1", "D0", "GND", "5V"],
+    labels: ["D13", "D12", "D11", "D3", "D2", "D1", "D0", "GND", "VCC"],
+    x: 938,
+    y: 92,
+    gap: 43,
   },
   utility: {
-    ids: ["GND", "AREF", "A4", "A5"],
-    x: 361,
-    y: 152,
-    gap: 51,
+    ids: ["D10", "D9", "D8"],
+    labels: ["D10", "D9", "D8"],
+    x: 725,
+    y: 92,
+    gap: 43,
   },
   breakout: {
-    ids: ["NC", "IOREF", "RESET"],
-    x: 654,
-    y: 638,
-    gap: 28,
+    ids: ["NC", "IOREF"],
+    labels: ["1", "2"],
+    x: 1082,
+    y: 598,
+    gap: 37,
   },
   power: {
-    ids: ["3V3", "5V", "GND", "GND", "VIN"],
-    x: 836,
-    y: 611,
-    gap: 30,
+    ids: ["RESET", "3V3", "5V"],
+    labels: ["3", "4", "5"],
+    x: 1198,
+    y: 598,
+    gap: 37,
   },
   analog: {
     ids: ["A0", "A1", "A2", "A3", "A4", "A5"],
-    x: 1050,
-    y: 611,
-    gap: 28,
+    x: 1068,
+    y: 692,
+    gap: 37,
   },
 };
 
@@ -63,7 +68,7 @@ function buildPadLookup() {
 
   layout.breakout.ids.forEach((id, index) => {
     const x = layout.breakout.x + index * layout.breakout.gap;
-    const positions = [609, 638].map((y, rowIndex) => ({
+    const positions = [598, 638, 678].map((y, rowIndex) => ({
       x,
       y,
       rowKey: "breakout",
@@ -77,7 +82,7 @@ function buildPadLookup() {
 
   layout.power.ids.forEach((id, index) => {
     const x = layout.power.x + index * layout.power.gap;
-    const positions = [582, 611].map((y, rowIndex) => ({
+    const positions = [598, 638, 678].map((y, rowIndex) => ({
       x,
       y,
       rowKey: "power",
@@ -92,13 +97,24 @@ function buildPadLookup() {
   layout.analog.ids.forEach((id, index) => {
     const x = layout.analog.x + index * layout.analog.gap;
     const list = padLookup.get(id) || [];
-    const positions = [582, 611].map((y, rowIndex) => ({
-      x,
-      y,
-      rowKey: "analog",
-      index,
-      rowIndex,
-    }));
+    const positions =
+      index === 0
+        ? [
+            {
+              x,
+              y: layout.analog.y,
+              rowKey: "analog",
+              index,
+              rowIndex: 0,
+            },
+          ]
+        : [598, 638, 678].map((y, rowIndex) => ({
+            x,
+            y,
+            rowKey: "analog",
+            index,
+            rowIndex,
+          }));
     padLookup.set(id, list.concat(positions));
   });
 
@@ -135,11 +151,40 @@ function headerLabel(id, x, y, className = "") {
   );
 }
 
+function headerLabels(row, y, className = "") {
+  return (row.labels || row.ids).map((label, index) =>
+    headerLabel(label, row.x + index * row.gap, y, className),
+  );
+}
+
 function boardCaption(label, x, y, className = "") {
   return (
     <text key={`${label}-${x}-${y}`} className={`board-caption ${className}`.trim()} x={x} y={y}>
       {label}
     </text>
+  );
+}
+
+function ButtonFootprint({ label, x, y, labelX = x, labelY = y - 36 }) {
+  const padPositions = [
+    [x - 52, y - 28],
+    [x + 52, y - 28],
+    [x - 52, y + 28],
+    [x + 52, y + 28],
+  ];
+
+  return (
+    <g className="shield-button">
+      <text className="shield-button-label" x={labelX} y={labelY}>{label}</text>
+      <line className="button-terminal-line" x1={x - 34} y1={y - 28} x2={x + 34} y2={y - 28} />
+      <line className="button-terminal-line" x1={x - 34} y1={y + 28} x2={x + 34} y2={y + 28} />
+      <line className="button-side-line" x1={x - 54} y1={y - 8} x2={x - 54} y2={y + 8} />
+      <line className="button-side-line" x1={x + 54} y1={y - 8} x2={x + 54} y2={y + 8} />
+      {padPositions.map(([padX, padY]) => (
+        <circle className="button-terminal-dot" cx={padX} cy={padY} r="10" key={`${label}-${padX}-${padY}`} />
+      ))}
+      <circle className="button-center" cx={x} cy={y} r="24" />
+    </g>
   );
 }
 
@@ -199,105 +244,81 @@ export default function BoardExplorer({ pins, selectedPin, relatedIds, onSelectP
             <svg className="board-svg schematic-svg" viewBox="0 0 1400 760" aria-labelledby="board-title" role="img">
               <title id="board-title">Arduino UNO R3 clickable schematic board explorer</title>
 
-              <path className="board-outline" d="M32 54 H1268 L1338 116 V694 L1302 732 H32 Z" />
-              <rect className="board-lcd" x="72" y="208" width="1116" height="304" rx="7" />
-              <rect className="board-connector" x="48" y="106" width="142" height="64" rx="6" />
-              <g className="board-chip">
-                <rect x="230" y="96" width="118" height="78" rx="18" />
-                <line x1="268" y1="96" x2="268" y2="174" />
-                <line x1="306" y1="96" x2="306" y2="174" />
-              </g>
+              <path className="board-outline" d="M32 42 H1288 L1358 108 V646 L1320 646 V680 L1292 712 H32 Z" />
+              <rect className="board-lcd" x="96" y="248" width="1190" height="292" rx="2" />
+              <text className="potentiometer-label" x="42" y="192">potentiometer</text>
+              <rect className="potentiometer-box" x="102" y="56" width="132" height="132" rx="2" />
+              <circle className="potentiometer-dot" cx="128" cy="96" r="12" />
+              <circle className="potentiometer-dot" cx="210" cy="96" r="12" />
+              <circle className="potentiometer-dot" cx="168" cy="138" r="12" />
+              <rect className="reserved-box" x="270" y="54" width="284" height="134" rx="2" />
+              <text className="reserved-label" x="412" y="112">Reserved</text>
+              <text className="reserved-label" x="412" y="150">Pins</text>
 
-              <line className="board-divider" x1="32" y1="196" x2="1338" y2="196" />
-              <line className="board-divider" x1="32" y1="526" x2="1338" y2="526" />
+              <line className="board-divider" x1="32" y1="196" x2="1358" y2="196" />
+              <line className="board-divider" x1="32" y1="556" x2="1358" y2="556" />
 
-              <text className="board-note blue board-note-sm" x="102" y="194">RP1</text>
-              <text className="board-note blue board-note-sm" x="242" y="194">ICSP</text>
-              <text className="board-note blue board-note-sm" x="314" y="276">IC1</text>
-              <text className="board-note blue board-note-sm" x="866" y="278">R7</text>
-              <text className="board-note blue board-note-sm" x="922" y="278">101</text>
+              {decorativePads(layout.serialHeader.x, layout.serialHeader.y, layout.serialHeader.ids.length, layout.serialHeader.gap)}
+              {decorativePads(layout.utility.x, layout.utility.y, layout.utility.ids.length, layout.utility.gap)}
+              {decorativePads(layout.digitalUpper.x, layout.digitalUpper.y, layout.digitalUpper.ids.length, layout.digitalUpper.gap)}
               {showKeypadHardware ? (
                 <>
-                  <text className="board-note green board-note-sm" x="126" y="522">R2</text>
-                  <text className="board-note green board-note-sm" x="228" y="522">R3</text>
-                  <text className="board-note green board-note-sm" x="320" y="522">R5</text>
-                  <text className="board-note green board-note-sm" x="320" y="694">R4</text>
-                  <text className="board-note green board-note-sm" x="440" y="522">R6</text>
+                  <text className="board-note green board-note-sm" x="98" y="694">R2</text>
+                  <text className="board-note green board-note-sm" x="206" y="694">R3</text>
+                  <text className="board-note green board-note-sm" x="338" y="576">R5</text>
+                  <text className="board-note green board-note-sm" x="338" y="710">R4</text>
+                  <text className="board-note green board-note-sm" x="522" y="694">R6</text>
                 </>
               ) : null}
 
-              <text className="board-lcd-text" x="458" y="372">LCD DISPLAY AREA</text>
-              <text className="board-lcd-subtext" x="506" y="420">(16x2 Character LCD)</text>
+              <text className="board-lcd-text" x="510" y="380">LCD DISPLAY AREA</text>
+              <text className="board-lcd-subtext" x="510" y="426">(16x2 Character LCD)</text>
 
               <g className={`button-zone ${showKeypadHardware ? "show-hardware" : ""}`}>
-                <rect className="button-zone-shell" x="44" y="548" width="472" height="136" rx="16" />
-
-                <g className="shield-button">
-                  <text className="shield-button-label" x="90" y="584">SELECT</text>
-                  <circle cx="96" cy="620" r="18" />
-                </g>
-                <g className="shield-button">
-                  <text className="shield-button-label" x="196" y="584">LEFT</text>
-                  <circle cx="202" cy="620" r="18" />
-                </g>
-                <g className="shield-button">
-                  <text className="shield-button-label" x="314" y="566">UP</text>
-                  <circle cx="320" cy="596" r="18" />
-                </g>
-                <g className="shield-button">
-                  <circle cx="320" cy="650" r="18" />
-                  <text className="shield-button-label" x="320" y="682">DOWN</text>
-                </g>
-                <g className="shield-button">
-                  <text className="shield-button-label" x="430" y="584">RIGHT</text>
-                  <circle cx="438" cy="620" r="18" />
-                </g>
+                <ButtonFootprint label="SELECT" x={104} y={668} />
+                <ButtonFootprint label="LEFT" x={246} y={668} />
+                <ButtonFootprint label="UP" x={396} y={626} labelX={346} labelY={594} />
+                <ButtonFootprint label="DOWN" x={396} y={700} labelX={338} labelY={744} />
+                <ButtonFootprint label="RIGHT" x={552} y={668} />
 
                 <g className="button-zone-hardware">
-                  <text x="78" y="704">Button resistor ladder on A0</text>
-                  <text x="78" y="720">SELECT → R2   LEFT → R3   DOWN → R4   UP → R5   RIGHT → R6</text>
+                  <text x="72" y="570">Button resistor ladder on A0</text>
+                  <text x="72" y="586">SELECT -&gt; R2   LEFT -&gt; R3   DOWN -&gt; R4   UP -&gt; R5   RIGHT -&gt; R6</text>
                 </g>
               </g>
 
               <g className="reset-control">
-                <text className="reset-label" x="548" y="584">RESET</text>
-                <circle className="reset-button" cx="548" cy="620" r="18" />
+                <ButtonFootprint label="RST" x={690} y={668} />
               </g>
 
-              {decorativePads(94, 236, 14, 42)}
               <g className="header-group-box">
-                <rect x="632" y="548" width="156" height="126" rx="18" />
-                {boardCaption("DFROBOT", 710, 564, "board-caption-hardware")}
-              </g>
-              <g className="header-group-box">
-                <rect x="814" y="548" width="156" height="96" rx="18" />
-                {boardCaption("POWER", 892, 564, "board-caption-hardware")}
+                <rect className="reserved-box" x="782" y="602" width="244" height="132" rx="2" />
+                <text className="reserved-label" x="904" y="664">Reserved</text>
+                <text className="reserved-label" x="904" y="702">Pins</text>
               </g>
               <g className="header-group-box">
-                <rect x="1016" y="548" width="220" height="96" rx="18" />
-                {boardCaption("ANALOG", 1126, 564, "board-caption-hardware")}
+                <rect x="1054" y="580" width="84" height="126" rx="2" />
+                <rect x="1164" y="580" width="190" height="126" rx="2" />
+                <text className="board-label analog-row" x="1360" y="602">GND</text>
+                <text className="board-label analog-row" x="1360" y="642">5V</text>
+                <text className="board-label analog-row" x="1360" y="682">S</text>
               </g>
 
-              {decorativePadGrid(654, 609, 2, 5, 28, 29)}
-              {decorativePadGrid(836, 582, 2, 5, 30, 29)}
-              {decorativePadGrid(1050, 582, 2, 6, 28, 29)}
+              {decorativePadGrid(layout.breakout.x, layout.breakout.y, 3, 2, layout.breakout.gap, 40)}
+              {decorativePadGrid(layout.power.x, layout.power.y, 3, 3, layout.power.gap, 40)}
+              {decorativePads(layout.analog.x, layout.analog.y, 1, layout.analog.gap)}
+              {decorativePadGrid(layout.analog.x + layout.analog.gap, 598, 3, 5, layout.analog.gap, 40)}
 
-              {boardCaption("LCD KEYPAD SHIELD", 620, 94, "board-caption-title")}
-              {boardCaption("JDIGITAL", 906, 86)}
-              {boardCaption("JUTILITY", 434, 140)}
-
-              {layout.digitalUpper.ids.map((id, index) =>
-                headerLabel(id, layout.digitalUpper.x + index * layout.digitalUpper.gap, 32, "vertical"),
-              )}
-              {["NC", "IOREF", "RESET"].map((label, index) =>
-                headerLabel(label, 654 + index * 28, 692, "vertical power"),
-              )}
-              {["3.3V", "5V", "GND", "GND", "VIN"].map((label, index) =>
-                headerLabel(label, 836 + index * 30, 692, "vertical power"),
-              )}
+              {headerLabels(layout.serialHeader, 64)}
+              {headerLabels(layout.utility, 64)}
+              {headerLabels(layout.digitalUpper, 64)}
+              {headerLabels(layout.breakout, 576)}
+              {headerLabels(layout.power, 576)}
               {layout.analog.ids.map((id, index) =>
-                headerLabel(id, 1050 + index * 28, 692, "vertical analog"),
+                headerLabel(id, layout.analog.x + index * layout.analog.gap, 728, "analog"),
               )}
+              {boardCaption("ANALOG IN", 1168, 748, "board-caption-hardware")}
+
 
               {pins.flatMap((pin) =>
                 (padLookup.get(pin.id) || []).map((position, index) => (

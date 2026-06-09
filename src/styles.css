@@ -450,15 +450,12 @@ pre {
 .board-connector,
 .board-chip rect,
 .board-chip line,
+.board-chip path,
 .board-divider,
 .button-cluster circle {
   fill: #f6f4eb;
   stroke: rgba(22, 26, 31, 0.92);
   stroke-width: 3;
-}
-
-.board-chip line {
-  fill: none;
 }
 
 .board-divider {
@@ -520,6 +517,39 @@ pre {
   fill: #161616;
 }
 
+.potentiometer-label {
+  font-size: clamp(20px, 1.5vw, 28px);
+  font-weight: 800;
+  fill: rgba(17, 24, 35, 0.96);
+  user-select: none;
+}
+
+.potentiometer-box,
+.reserved-box {
+  stroke: rgba(17, 24, 35, 0.96);
+  stroke-width: 4;
+}
+
+.potentiometer-box {
+  fill: #f6f4eb;
+}
+
+.reserved-box {
+  fill: rgba(17, 24, 35, 0.96);
+}
+
+.potentiometer-dot {
+  fill: rgba(17, 24, 35, 0.96);
+}
+
+.reserved-label {
+  font-size: clamp(22px, 1.7vw, 30px);
+  font-weight: 800;
+  fill: #f6f4eb;
+  text-anchor: middle;
+  user-select: none;
+}
+
 .board-brand {
   font-size: 14px;
   letter-spacing: 0.14em;
@@ -563,16 +593,6 @@ pre {
   fill: rgba(17, 24, 35, 0.7);
 }
 
-.button-zone-shell,
-.reset-button {
-  fill: rgba(241, 239, 226, 0.92);
-  stroke: rgba(22, 26, 31, 0.88);
-}
-
-.button-zone-shell {
-  stroke-width: 2.4;
-}
-
 .button-zone-caption,
 .shield-button-label,
 .reset-label {
@@ -589,17 +609,29 @@ pre {
   text-transform: uppercase;
 }
 
-.shield-button circle,
-.reset-button {
-  stroke-width: 2.6;
-}
-
 .shield-button-label,
 .reset-label {
   fill: #2640b0;
   font-size: clamp(11px, 0.95vw, 12px);
   font-weight: 700;
   letter-spacing: 0.08em;
+}
+
+.button-terminal-dot {
+  fill: rgba(17, 24, 35, 0.96);
+}
+
+.button-center {
+  fill: #f6f4eb;
+  stroke: rgba(17, 24, 35, 0.96);
+  stroke-width: 4;
+}
+
+.button-terminal-line,
+.button-side-line {
+  stroke: rgba(17, 24, 35, 0.96);
+  stroke-width: 4;
+  stroke-linecap: square;
 }
 
 .button-zone-hardware {
@@ -622,8 +654,8 @@ pre {
 
 .header-group-box rect {
   fill: rgba(243, 239, 223, 0.34);
-  stroke: rgba(22, 26, 31, 0.16);
-  stroke-width: 1.8;
+  stroke: rgba(22, 26, 31, 0.55);
+  stroke-width: 2.4;
 }
 
 .header-group-divider {
@@ -635,6 +667,10 @@ pre {
   font-size: clamp(12px, 1vw, 13px);
   letter-spacing: 0.14em;
   fill: rgba(17, 24, 35, 0.62);
+}
+
+.analog-row {
+  fill: rgba(17, 24, 35, 0.86);
 }
 
 .board-caption-row {

@@ -18,6 +18,8 @@ Built an interactive embedded systems learning tool for the Arduino UNO R3 / ATm
 
 Board connector naming and header pin ordering were grounded in the Arduino UNO R3 board datasheet (`A000066-datasheet.pdf`), especially the `JANALOG` and `JDIGITAL` connector tables.
 
+The LCD Keypad Shield board visualization uses the DFRobot DFR0009 layout diagram as its visual reference: https://raw.githubusercontent.com/Arduinolibrary/DFRobot_LCD_keypad/master/DFR0009_Layout.png
+
 Detailed AVR register behavior in this project is intentionally educational and should be checked against the official ATmega328P microcontroller datasheet before claiming full hardware accuracy.
 
 ## Tech Stack
