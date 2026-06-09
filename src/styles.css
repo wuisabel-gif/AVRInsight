@@ -667,10 +667,10 @@ pre {
   letter-spacing: 0.04em;
 }
 
-.header-group-box rect {
-  fill: rgba(243, 239, 223, 0.34);
-  stroke: rgba(22, 26, 31, 0.55);
-  stroke-width: 2.4;
+.header-group-box rect.reserved-box {
+  fill: rgba(17, 24, 35, 0.96);
+  stroke: rgba(17, 24, 35, 0.96);
+  stroke-width: 4;
 }
 
 .header-group-divider {

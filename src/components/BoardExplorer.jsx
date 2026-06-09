@@ -22,22 +22,8 @@ const layout = {
     y: 92,
     gap: 43,
   },
-  breakout: {
-    ids: ["NC", "IOREF"],
-    labels: ["1", "2"],
-    x: 1082,
-    y: 598,
-    gap: 37,
-  },
-  power: {
-    ids: ["RESET", "3V3", "5V"],
-    labels: ["3", "4", "5"],
-    x: 1198,
-    y: 598,
-    gap: 37,
-  },
   analog: {
-    ids: ["A1", "A2", "A3", "A4", "A5"],
+    ids: ["A0", "A1", "A2", "A3", "A4", "A5"],
     x: 1068,
     y: 692,
     gap: 37,
@@ -48,7 +34,7 @@ function buildPadLookup() {
   const padLookup = new Map();
 
   Object.entries(layout).forEach(([rowKey, row]) => {
-    if (rowKey === "breakout" || rowKey === "power" || rowKey === "analog") {
+    if (rowKey === "analog") {
       return;
     }
 
@@ -64,34 +50,6 @@ function buildPadLookup() {
       list.push(position);
       padLookup.set(id, list);
     });
-  });
-
-  layout.breakout.ids.forEach((id, index) => {
-    const x = layout.breakout.x + index * layout.breakout.gap;
-    const positions = [598, 638, 678].map((y, rowIndex) => ({
-      x,
-      y,
-      rowKey: "breakout",
-      index,
-      rowIndex,
-    }));
-
-    const list = padLookup.get(id) || [];
-    padLookup.set(id, list.concat(positions));
-  });
-
-  layout.power.ids.forEach((id, index) => {
-    const x = layout.power.x + index * layout.power.gap;
-    const positions = [598, 638, 678].map((y, rowIndex) => ({
-      x,
-      y,
-      rowKey: "power",
-      index,
-      rowIndex,
-    }));
-
-    const list = padLookup.get(id) || [];
-    padLookup.set(id, list.concat(positions));
   });
 
   layout.analog.ids.forEach((id, index) => {
@@ -312,16 +270,13 @@ export default function BoardExplorer({ pins, selectedPin, relatedIds, onSelectP
                 <text className="board-label analog-row" x="1360" y="682">S</text>
               </g>
 
-              {decorativePadGrid(layout.breakout.x, layout.breakout.y, 3, 2, layout.breakout.gap, 40)}
-              {decorativePadGrid(layout.power.x, layout.power.y, 3, 3, layout.power.gap, 40)}
+
               {decorativePads(layout.analog.x, layout.analog.y, 1, layout.analog.gap)}
               {decorativePadGrid(layout.analog.x + layout.analog.gap, 598, 3, 5, layout.analog.gap, 40)}
 
               {headerLabels(layout.serialHeader, 64)}
               {headerLabels(layout.utility, 64)}
               {headerLabels(layout.digitalUpper, 64)}
-              {headerLabels(layout.breakout, 576)}
-              {headerLabels(layout.power, 576)}
               {layout.analog.ids.map((id, index) =>
                 headerLabel(id, layout.analog.x + index * layout.analog.gap, 728, "analog"),
               )}
@@ -385,7 +340,7 @@ export default function BoardExplorer({ pins, selectedPin, relatedIds, onSelectP
         <div className="legend-row">
           <span><i className="legend-dot selected" /> Selected pin</span>
           <span><i className="legend-dot related" /> Search matches</span>
-          <span><i className="legend-dot power" /> Power / control pads</span>
+          <span><i className="legend-dot power" /> Power / control references</span>
         </div>
       </section>
 

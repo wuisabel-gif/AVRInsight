@@ -23,11 +23,6 @@ const topUtility = {
 };
 
 const bottomPower = {
-  NC: { x: 305, y: 338 },
-  IOREF: { x: 316, y: 338 },
-  RESET: { x: 327, y: 338 },
-  "3V3": { x: 338, y: 338 },
-  "5V": { x: 349, y: 338 },
   GND_A: { x: 360, y: 338 },
   GND_B: { x: 371, y: 338 },
   VIN: { x: 382, y: 338 },
@@ -606,107 +601,6 @@ digitalWrite(13, HIGH); // onboard LED-related pin
     exampleCode: `
 analogReference(EXTERNAL);
 // Provide a safe external reference on AREF if you use this mode.
-`,
-  }),
-  pin({
-    id: "NC",
-    displayName: "Not Connected",
-    aliases: ["NC", "Not Connected"],
-    category: "control",
-    header: "JANALOG",
-    headerPinNumber: 1,
-    arduinoPin: "NC",
-    avrPort: null,
-    avrPin: null,
-    bit: null,
-    headerPositionLabel: "Bottom power header, far left",
-    physicalLocation: bottomPower.NC,
-    functions: ["No Connection"],
-    description: "The first position on the JANALOG/power side is not connected according to the Arduino UNO R3 board datasheet.",
-    beginnerExplanation: "NC means the header pad exists physically but is not wired into a board signal you should use.",
-    exampleCode: `
-// No code example: this pad is intentionally not connected.
-`,
-  }),
-  pin({
-    id: "IOREF",
-    displayName: "IOREF",
-    aliases: ["IOREF", "I/O Reference", "Logic Reference"],
-    category: "control",
-    header: "JANALOG",
-    headerPinNumber: 2,
-    arduinoPin: "IOREF",
-    avrPort: null,
-    avrPin: null,
-    bit: null,
-    headerPositionLabel: "Bottom power header, second from left",
-    physicalLocation: bottomPower.IOREF,
-    functions: ["Logic Voltage Reference"],
-    description: "IOREF is a board-level reference output used by shields to discover the logic voltage expected by the board.",
-    beginnerExplanation: "Unlike GPIO pins, IOREF is there to help add-on hardware adapt safely to the board's logic voltage.",
-    exampleCode: `
-// IOREF is primarily for shield hardware design rather than sketch code.
-`,
-  }),
-  pin({
-    id: "RESET",
-    displayName: "Reset",
-    aliases: ["RESET", "RST", "Reset Pin", "PC6", "nRESET"],
-    category: "control",
-    header: "JANALOG",
-    headerPinNumber: 3,
-    arduinoPin: "RESET",
-    avrPort: null,
-    avrPin: "PC6 / RESET",
-    bit: null,
-    headerPositionLabel: "Bottom power header, third from left",
-    physicalLocation: bottomPower.RESET,
-    functions: ["Reset Input"],
-    relatedRegisters: ["MCUSR"],
-    description: "RESET restarts the ATmega328P and re-runs the boot path. It is a board control signal, not a normal beginner I/O pin.",
-    beginnerExplanation: "This pin has a very different job from digital pins. Pulling RESET low forces the microcontroller to reboot instead of reading or writing user data.",
-    exampleCode: `
-// RESET is a hardware control line, not a normal digital pin for pinMode().
-`,
-  }),
-  pin({
-    id: "3V3",
-    displayName: "3.3V Power",
-    aliases: ["3.3V", "3V3", "+3V3"],
-    category: "power",
-    header: "JANALOG",
-    headerPinNumber: 4,
-    arduinoPin: "3.3V",
-    avrPort: null,
-    avrPin: null,
-    bit: null,
-    headerPositionLabel: "Bottom power header, fourth from left",
-    physicalLocation: bottomPower["3V3"],
-    functions: ["3.3V Power Rail"],
-    description: "The 3.3V header pin provides the board's regulated 3.3V rail for external circuits that need it.",
-    beginnerExplanation: "Power pins are supply points, not programmable pins. They deliver voltage but do not have port names like PD2 or PB5.",
-    exampleCode: `
-// Use this as a 3.3V supply rail for suitable external hardware.
-`,
-  }),
-  pin({
-    id: "5V",
-    displayName: "5V Power",
-    aliases: ["5V", "+5V", "VCC", "Logic Rail"],
-    category: "power",
-    header: "JANALOG",
-    headerPinNumber: 5,
-    arduinoPin: "5V",
-    avrPort: null,
-    avrPin: null,
-    bit: null,
-    headerPositionLabel: "Bottom power header, fifth from left",
-    physicalLocation: bottomPower["5V"],
-    functions: ["5V Power Rail"],
-    description: "The 5V pin exposes the main logic rail used by the UNO R3. Many beginner sensors and shields use this as their supply voltage.",
-    beginnerExplanation: "5V is a power source, not a data signal. It matters because many AVR port names and logic thresholds assume this board-level supply voltage.",
-    exampleCode: `
-// Use with care as a 5V supply rail for external hardware.
 `,
   }),
   pin({
