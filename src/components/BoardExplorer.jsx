@@ -37,7 +37,7 @@ const layout = {
     gap: 37,
   },
   analog: {
-    ids: ["A0", "A1", "A2", "A3", "A4", "A5"],
+    ids: ["A1", "A2", "A3", "A4", "A5"],
     x: 1068,
     y: 692,
     gap: 37,
@@ -257,7 +257,6 @@ export default function BoardExplorer({ pins, selectedPin, relatedIds, onSelectP
               <circle className="potentiometer-dot" cx="179" cy="96" r="12" />
               <circle className="potentiometer-dot" cx="141" cy="138" r="12" />
               <rect className="reserved-box" x="250" y="54" width="264" height="134" rx="2" />
-              <rect className="reserved-box-inner" x="262" y="66" width="240" height="110" rx="2" />
               <text className="reserved-label" x="372" y="112">Reserved</text>
               <text className="reserved-label" x="372" y="150">Pins</text>
 
@@ -301,9 +300,9 @@ export default function BoardExplorer({ pins, selectedPin, relatedIds, onSelectP
               </g>
 
               <g className="header-group-box">
-                <rect className="reserved-box" x="782" y="592" width="244" height="132" rx="2" />
-                <text className="reserved-label" x="904" y="664">Reserved</text>
-                <text className="reserved-label" x="904" y="702">Pins</text>
+                <rect className="reserved-box" x="782" y="592" width="244" height="100" rx="2" />
+                <text className="reserved-label" x="904" y="630">Reserved</text>
+                <text className="reserved-label" x="904" y="670">Pins</text>
               </g>
               <g className="header-group-box">
                 <rect x="1054" y="580" width="84" height="126" rx="2" />
