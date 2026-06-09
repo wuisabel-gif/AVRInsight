@@ -128,8 +128,8 @@ function decorativePads(x, y, count, gap) {
     const px = x + index * gap;
     return (
       <g className="decorative-pad" key={`${x}-${y}-${index}`}>
-        <circle className="decorative-pad-shell" cx={px} cy={y} r="9" />
-        <circle className="decorative-pad-hole" cx={px} cy={y} r="4.5" />
+        <circle className="decorative-pad-shell" cx={px} cy={y} r="7" />
+        <circle className="decorative-pad-hole" cx={px} cy={y} r="3.5" />
       </g>
     );
   });
@@ -165,25 +165,30 @@ function boardCaption(label, x, y, className = "") {
   );
 }
 
+function HeaderStrip({ row, y }) {
+  const width = (row.ids.length - 1) * row.gap + 24;
+  return <rect className="header-strip" x={row.x - 12} y={y - 11} width={width} height="22" rx="3" />;
+}
+
 function ButtonFootprint({ label, x, y, labelX = x, labelY = y - 36 }) {
   const padPositions = [
-    [x - 52, y - 28],
-    [x + 52, y - 28],
-    [x - 52, y + 28],
-    [x + 52, y + 28],
+    [x - 38, y - 22],
+    [x + 38, y - 22],
+    [x - 38, y + 22],
+    [x + 38, y + 22],
   ];
 
   return (
     <g className="shield-button">
       <text className="shield-button-label" x={labelX} y={labelY}>{label}</text>
-      <line className="button-terminal-line" x1={x - 34} y1={y - 28} x2={x + 34} y2={y - 28} />
-      <line className="button-terminal-line" x1={x - 34} y1={y + 28} x2={x + 34} y2={y + 28} />
-      <line className="button-side-line" x1={x - 54} y1={y - 8} x2={x - 54} y2={y + 8} />
-      <line className="button-side-line" x1={x + 54} y1={y - 8} x2={x + 54} y2={y + 8} />
+      <line className="button-terminal-line" x1={x - 24} y1={y - 22} x2={x + 24} y2={y - 22} />
+      <line className="button-terminal-line" x1={x - 24} y1={y + 22} x2={x + 24} y2={y + 22} />
+      <line className="button-side-line" x1={x - 40} y1={y - 8} x2={x - 40} y2={y + 8} />
+      <line className="button-side-line" x1={x + 40} y1={y - 8} x2={x + 40} y2={y + 8} />
       {padPositions.map(([padX, padY]) => (
-        <circle className="button-terminal-dot" cx={padX} cy={padY} r="10" key={`${label}-${padX}-${padY}`} />
+        <circle className="button-terminal-dot" cx={padX} cy={padY} r="8" key={`${label}-${padX}-${padY}`} />
       ))}
-      <circle className="button-center" cx={x} cy={y} r="24" />
+      <circle className="button-center" cx={x} cy={y} r="20" />
     </g>
   );
 }
@@ -246,18 +251,22 @@ export default function BoardExplorer({ pins, selectedPin, relatedIds, onSelectP
 
               <path className="board-outline" d="M32 42 H1288 L1358 108 V646 L1320 646 V680 L1292 712 H32 Z" />
               <rect className="board-lcd" x="96" y="248" width="1190" height="292" rx="2" />
-              <text className="potentiometer-label" x="42" y="192">potentiometer</text>
-              <rect className="potentiometer-box" x="102" y="56" width="132" height="132" rx="2" />
-              <circle className="potentiometer-dot" cx="128" cy="96" r="12" />
-              <circle className="potentiometer-dot" cx="210" cy="96" r="12" />
-              <circle className="potentiometer-dot" cx="168" cy="138" r="12" />
+
+              <rect className="potentiometer-box" x="80" y="56" width="120" height="120" rx="2" />
+              <circle className="potentiometer-dot" cx="105" cy="96" r="12" />
+              <circle className="potentiometer-dot" cx="179" cy="96" r="12" />
+              <circle className="potentiometer-dot" cx="141" cy="138" r="12" />
               <rect className="reserved-box" x="270" y="54" width="284" height="134" rx="2" />
+              <rect className="reserved-box-inner" x="282" y="66" width="260" height="110" rx="2" />
               <text className="reserved-label" x="412" y="112">Reserved</text>
               <text className="reserved-label" x="412" y="150">Pins</text>
 
               <line className="board-divider" x1="32" y1="196" x2="1358" y2="196" />
               <line className="board-divider" x1="32" y1="556" x2="1358" y2="556" />
 
+              <HeaderStrip row={layout.serialHeader} y={layout.serialHeader.y} />
+              <HeaderStrip row={layout.utility} y={layout.utility.y} />
+              <HeaderStrip row={layout.digitalUpper} y={layout.digitalUpper.y} />
               {decorativePads(layout.serialHeader.x, layout.serialHeader.y, layout.serialHeader.ids.length, layout.serialHeader.gap)}
               {decorativePads(layout.utility.x, layout.utility.y, layout.utility.ids.length, layout.utility.gap)}
               {decorativePads(layout.digitalUpper.x, layout.digitalUpper.y, layout.digitalUpper.ids.length, layout.digitalUpper.gap)}
@@ -293,6 +302,7 @@ export default function BoardExplorer({ pins, selectedPin, relatedIds, onSelectP
 
               <g className="header-group-box">
                 <rect className="reserved-box" x="782" y="602" width="244" height="132" rx="2" />
+                <rect className="reserved-box-inner" x="794" y="614" width="220" height="108" rx="2" />
                 <text className="reserved-label" x="904" y="664">Reserved</text>
                 <text className="reserved-label" x="904" y="702">Pins</text>
               </g>
