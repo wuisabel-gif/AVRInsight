@@ -42,8 +42,8 @@ export default function DebuggerPanel({
       <section className="detail-card">
         <h2>Ask The Debugger</h2>
         <p>
-          Ask a natural-language question, paste AVR or Arduino setup code, and let the backend
-          walk through pins, interrupt modes, vectors, and likely problems.
+          Ask a question in plain English and paste your setup code. The backend traces it —
+          pins, interrupt modes, vectors, the usual failure points — and reports what looks wrong.
         </p>
 
         <label className="search-label" htmlFor="debugger-query">Question</label>
@@ -151,7 +151,7 @@ export default function DebuggerPanel({
             )}
           </>
         ) : (
-          <p className="muted">When enabled, the backend can layer a Gemini explanation on top of the deterministic AVR checks.</p>
+          <p className="muted">When enabled, the backend layers a Gemini explanation on top of the deterministic AVR checks.</p>
         )}
       </section>
     </>

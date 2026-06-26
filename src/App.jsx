@@ -131,10 +131,10 @@ export default function App() {
           <div className="eyebrow">Arduino UNO R3 / ATmega328P</div>
           <h1>Pin, Port, Register, Timer, and Interrupt Explorer</h1>
           <p>
-            Built as an interactive embedded systems learning tool for the Arduino UNO R3 /
-            ATmega328P, this explorer visually connects physical board pins to "AVR registers",
-            "interrupts", "timers", and "communication roles" through searchable aliases,
-            board mapping, register decoding, animation, and guided debugging support.
+            Click a pin on the UNO R3 and see what sits underneath it: the ATmega328P port and
+            bit it drives, the registers that configure it, the interrupts and timers it can fire.
+            Search by any name the datasheet or your sketch uses — D2, PD2, INT0, OCR1A — and the
+            board lights up as you go.
           </p>
         </section>
 
