@@ -66,13 +66,39 @@ function buildPadLookup() {
               rowIndex: 0,
             },
           ]
-        : [598, 638, 678].map((y, rowIndex) => ({
-            x,
-            y,
-            rowKey: "analog",
-            index,
-            rowIndex,
-          }));
+        : [
+            // Only the third row is the analog signal pin. The first row is 5V
+            // and the second row is GND, so they are left as decorative pads.
+            {
+              x,
+              y: 678,
+              rowKey: "analog",
+              index,
+              rowIndex: 2,
+            },
+          ];
+    padLookup.set(id, list.concat(positions));
+  });
+
+  // Connect the analog breakout's power rails to the board's VCC (5V) and GND
+  // pins so the first row reads as 5V and the second row as GND. Columns line
+  // up with A1-A5 (the A0 single pad column is skipped).
+  const railColumns = layout.analog.ids
+    .map((_, index) => layout.analog.x + index * layout.analog.gap)
+    .slice(1);
+
+  [
+    { id: "5V", y: 598, rowIndex: 0 },
+    { id: "GND", y: 638, rowIndex: 1 },
+  ].forEach(({ id, y, rowIndex }) => {
+    const list = padLookup.get(id) || [];
+    const positions = railColumns.map((x, columnIndex) => ({
+      x,
+      y,
+      rowKey: "analog",
+      index: columnIndex + 1,
+      rowIndex,
+    }));
     padLookup.set(id, list.concat(positions));
   });
 
@@ -263,11 +289,10 @@ export default function BoardExplorer({ pins, selectedPin, relatedIds, onSelectP
                 <text className="reserved-label" x="904" y="670">Pins</text>
               </g>
               <g className="header-group-box">
-                <rect x="1054" y="580" width="84" height="126" rx="2" />
-                <rect x="1164" y="580" width="190" height="126" rx="2" />
-                <text className="board-label analog-row" x="1360" y="602">GND</text>
-                <text className="board-label analog-row" x="1360" y="642">5V</text>
-                <text className="board-label analog-row" x="1360" y="682">S</text>
+                <rect x="1054" y="580" width="222" height="126" rx="2" />
+                <text className="analog-row" x="1096" y="606" textAnchor="end">5V</text>
+                <text className="analog-row" x="1096" y="646" textAnchor="end">GND</text>
+                <text className="analog-row" x="1096" y="686" textAnchor="end">S</text>
               </g>
 
 

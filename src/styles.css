@@ -685,7 +685,10 @@ pre {
 }
 
 .analog-row {
-  fill: rgba(17, 24, 35, 0.86);
+  fill: rgba(245, 242, 232, 0.92);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 .board-caption-row {

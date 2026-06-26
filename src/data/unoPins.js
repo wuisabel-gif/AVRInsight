@@ -26,6 +26,7 @@ const bottomPower = {
   GND_A: { x: 360, y: 338 },
   GND_B: { x: 371, y: 338 },
   VIN: { x: 382, y: 338 },
+  VCC: { x: 349, y: 338 },
 };
 
 const bottomAnalog = {
@@ -579,6 +580,27 @@ digitalWrite(13, HIGH); // onboard LED-related pin
     exampleCode: `
 // No pinMode needed.
 // Connect your circuit's ground here so signal voltages share a common reference.
+`,
+  }),
+  pin({
+    id: "5V",
+    displayName: "5V Supply (VCC)",
+    aliases: ["5V", "VCC", "+5V", "Supply", "Power", "Vcc"],
+    category: "power",
+    header: "JPOWER",
+    headerPinNumber: 5,
+    arduinoPin: "5V",
+    avrPort: null,
+    avrPin: null,
+    bit: null,
+    headerPositionLabel: "Power header 5V, plus VCC pads on the serial and digital headers and the analog breakout 5V rail",
+    physicalLocation: bottomPower.VCC,
+    functions: ["Regulated 5V Output", "Logic Supply"],
+    description: "5V is the regulated supply rail that powers the ATmega328P and most shields. It is sourced from the onboard regulator (fed by VIN or the barrel jack) or from USB. Every VCC pad on the board is tied to this same 5V rail.",
+    beginnerExplanation: "VCC and 5V are the same thing: the positive supply rail that logic-high signals are measured against. It does not map to an AVR port bit because it is power, not a GPIO signal.",
+    exampleCode: `
+// No pinMode needed.
+// Power your 5V sensors/modules from this rail; stay within the regulator's current limit.
 `,
   }),
   pin({
